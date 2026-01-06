@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 import { Button } from './ui/Shared';
 
@@ -7,6 +7,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +20,9 @@ const Navbar: React.FC = () => {
   // Define nav links - all are routes now
   const navLinks = [
     { name: 'Process', href: '/process', isRoute: true },
-    { name: 'Results', href: '/results', isRoute: true },
     { name: 'Pricing', href: '/pricing', isRoute: true },
     { name: 'Evidence', href: '/evidence', isRoute: true },
+    { name: 'Contact', href: '/contact', isRoute: true },
   ];
 
   // Check if a route is active (handles both exact and prefix matches)
@@ -30,7 +31,12 @@ const Navbar: React.FC = () => {
     return location.pathname === href || location.pathname.startsWith(href + '/');
   };
 
-  const scrollToAudit = () => document.getElementById('audit-form')?.scrollIntoView({ behavior: 'smooth' });
+  const goToCalendar = () => {
+    navigate('/contact');
+    setTimeout(() => {
+      document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <nav 
@@ -78,7 +84,7 @@ const Navbar: React.FC = () => {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <Button size="sm" onClick={scrollToAudit}>
+          <Button size="sm" onClick={goToCalendar}>
             Book a 15-min Call
           </Button>
         </div>
@@ -124,7 +130,7 @@ const Navbar: React.FC = () => {
           ))}
           <Button className="w-full" onClick={() => {
             setIsMobileMenuOpen(false);
-            scrollToAudit();
+            goToCalendar();
           }}>
             Book a 15-min Call
           </Button>

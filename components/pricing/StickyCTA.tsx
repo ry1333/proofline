@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Shared';
 import { trackBookCallClick, trackRunAuditClick } from '../../utils/analytics';
@@ -9,6 +10,7 @@ interface StickyCTAProps {
 
 const StickyCTA: React.FC<StickyCTAProps> = ({ showAfterPx = 600 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,12 +23,12 @@ const StickyCTA: React.FC<StickyCTAProps> = ({ showAfterPx = 600 }) => {
 
   const handleBookClick = () => {
     trackBookCallClick('pricing_sticky');
-    window.open('https://calendly.com', '_blank');
+    navigate('/contact');
   };
 
   const handleAuditClick = () => {
     trackRunAuditClick('pricing_sticky');
-    window.location.href = '/#audit-form';
+    navigate('/contact');
   };
 
   return (

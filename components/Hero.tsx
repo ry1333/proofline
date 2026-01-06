@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ResponsiveContainer, AreaChart, Area, CartesianGrid, XAxis, Tooltip } from 'recharts';
 import { ArrowRight, Activity, Zap, Check, Terminal } from 'lucide-react';
 import { Button } from './ui/Shared';
@@ -15,6 +16,8 @@ const data = [
 ];
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20 px-4 flex items-center justify-center overflow-hidden bg-brand-dark">
       {/* Background Tech */}
@@ -80,10 +83,16 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Button size="lg" className="w-full sm:w-auto" onClick={() => document.getElementById('audit-form')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" className="w-full sm:w-auto" onClick={() => {
+              navigate('/contact');
+              setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
+            }}>
               Book a 15-min Call
             </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => document.getElementById('audit-form')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => {
+              navigate('/contact');
+              setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
+            }}>
               Run Free Audit
             </Button>
           </motion.div>

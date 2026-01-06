@@ -8,11 +8,13 @@ import Pricing from './components/Pricing';
 import AuditForm from './components/AuditForm';
 import { Footer } from './components/LabAndFAQ';
 import ProcessPage from './components/ProcessPage';
-import ResultsPage from './components/ResultsPage';
-import ResultsDetailPage from './components/ResultsDetailPage';
 import PricingPage from './components/PricingPage';
+import ContactPage from './components/ContactPage';
 import EvidenceHub from './components/EvidenceHub';
 import EvidenceArticle from './components/EvidenceArticle';
+import PrivacyPage from './components/PrivacyPage';
+import TermsPage from './components/TermsPage';
+import NotFoundPage from './components/NotFoundPage';
 
 // Home page content
 const HomePage: React.FC = () => (
@@ -44,11 +46,13 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/process" element={<ProcessPage />} />
-          <Route path="/results" element={<ResultsPage />} />
-          <Route path="/results/:slug" element={<ResultsDetailPage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/evidence" element={<EvidenceHub />} />
           <Route path="/evidence/:slug" element={<EvidenceArticle />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

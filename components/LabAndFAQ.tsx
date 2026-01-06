@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Section } from './ui/Shared';
 import { Beaker, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -89,9 +90,9 @@ export const Footer: React.FC = () => {
         </div>
         
         <div className="flex gap-8 text-[10px] font-bold tracking-widest uppercase text-gray-500">
-          <a href="#" className="hover:text-white transition-colors">Privacy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms</a>
-          <a href="#" className="hover:text-white transition-colors">Lab Notes</a>
+          <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+          <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+          <Link to="/evidence" className="hover:text-white transition-colors">Evidence</Link>
         </div>
       </div>
     </footer>

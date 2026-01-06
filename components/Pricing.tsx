@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Section, SectionHeader, Button } from './ui/Shared';
 import { Check } from 'lucide-react';
 
 const Pricing: React.FC = () => {
+  const navigate = useNavigate();
   const plans = [
     {
       name: "Launch",
@@ -60,10 +62,13 @@ const Pricing: React.FC = () => {
               </ul>
             </div>
 
-            <Button 
-              variant={plan.popular ? 'primary' : 'outline'} 
+            <Button
+              variant={plan.popular ? 'primary' : 'outline'}
               className="w-full"
-              onClick={() => document.getElementById('audit-form')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                navigate('/contact');
+                setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }}
             >
               Book a 15-min Call
             </Button>

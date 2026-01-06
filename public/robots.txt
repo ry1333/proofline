@@ -1,0 +1,11 @@
+# ProofLine robots.txt
+# https://proofline.co
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://proofline.co/sitemap.xml
+
+# Disallow admin/internal paths (if any)
+Disallow: /api/

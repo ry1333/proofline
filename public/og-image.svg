@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#030303"/>
+
+  <!-- Dot grid pattern -->
+  <defs>
+    <pattern id="dotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#222"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#dotGrid)"/>
+
+  <!-- Border accent -->
+  <rect x="40" y="40" width="1120" height="550" rx="8" fill="none" stroke="#00FF94" stroke-width="1" opacity="0.2"/>
+
+  <!-- Logo/Brand -->
+  <text x="600" y="280" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="#FFFFFF" text-anchor="middle">ProofLine</text>
+
+  <!-- Tagline -->
+  <text x="600" y="350" font-family="Inter, sans-serif" font-size="28" font-weight="400" fill="#888888" text-anchor="middle">Conversion-First Web Studio</text>
+
+  <!-- Accent line -->
+  <rect x="500" y="390" width="200" height="3" rx="1.5" fill="#00FF94"/>
+
+  <!-- Corner accents -->
+  <path d="M60 60 L60 100 M60 60 L100 60" stroke="#00FF94" stroke-width="2" fill="none"/>
+  <path d="M1140 60 L1140 100 M1140 60 L1100 60" stroke="#00FF94" stroke-width="2" fill="none"/>
+  <path d="M60 570 L60 530 M60 570 L100 570" stroke="#00FF94" stroke-width="2" fill="none"/>
+  <path d="M1140 570 L1140 530 M1140 570 L1100 570" stroke="#00FF94" stroke-width="2" fill="none"/>
+</svg>

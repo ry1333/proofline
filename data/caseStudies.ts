@@ -30,7 +30,7 @@ export const caseStudies: CaseStudy[] = [
     name: 'Bailey Wildfire Solutions',
     oneLiner: 'Fire mitigation company needed faster lead response and better tracking.',
     deliverables: ['WEB', 'AUTOMATION', 'TRACKING', 'CRM'],
-    stack: ['Next.js', 'Tailwind', 'GoHighLevel', 'GA4', 'GTM'],
+    stack: ['Next.js', 'Tailwind', 'Zapier', 'GA4', 'GTM'],
     year: 2024,
     metrics: [
       { label: 'Speed-to-lead', value: '<60s', isExample: false },
@@ -92,7 +92,7 @@ export const caseStudies: CaseStudy[] = [
     name: 'Ironclad Roofing',
     oneLiner: 'Roofing contractor needed to capture storm-damage leads fast.',
     deliverables: ['WEB', 'AUTOMATION', 'SEO'],
-    stack: ['Next.js', 'Vercel', 'GoHighLevel', 'GA4'],
+    stack: ['Next.js', 'Vercel', 'Make', 'GA4'],
     year: 2024,
     metrics: [
       { label: 'Organic traffic', value: '+210%', isExample: true },

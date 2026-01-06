@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, Clock } from 'lucide-react';
 import { PricingTier } from '../../data/pricing';
@@ -12,11 +13,12 @@ interface PricingTierCardProps {
 
 const PricingTierCard: React.FC<PricingTierCardProps> = ({ tier, index = 0 }) => {
   const isHighlighted = !!tier.label;
+  const navigate = useNavigate();
 
   const handleCTAClick = () => {
     trackPricingTierClick(tier.id);
     trackBookCallClick('pricing_tier');
-    document.getElementById('pricing-cta')?.scrollIntoView({ behavior: 'smooth' });
+    navigate('/contact');
   };
 
   return (

@@ -95,14 +95,18 @@ const ArticleDisclaimer: React.FC = () => (
 // CTA SECTION - FUI Style
 // ============================================
 const ArticleCTA: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleBookClick = () => {
     trackBookCallClick('evidence_article_footer');
-    window.open('https://calendly.com', '_blank');
+    navigate('/contact');
+    setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   const handleAuditClick = () => {
     trackRunAuditClick('evidence_article_footer');
-    window.location.href = '/#audit-form';
+    navigate('/contact');
+    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   return (

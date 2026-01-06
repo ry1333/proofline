@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Section, Button } from './ui/Shared';
 import EvidenceArticleCard from './evidence/EvidenceArticleCard';
@@ -137,14 +138,18 @@ const LibrarySection: React.FC = () => {
 // CTA SECTION - FUI Style
 // ============================================
 const CTASection: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleBookClick = () => {
     trackBookCallClick('evidence_hub');
-    window.open('https://calendly.com', '_blank');
+    navigate('/contact');
+    setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   const handleAuditClick = () => {
     trackRunAuditClick('evidence_hub');
-    window.location.href = '/#audit-form';
+    navigate('/contact');
+    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   return (

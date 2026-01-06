@@ -313,7 +313,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: 'What tools do you integrate?',
-    answer: 'Calendly, Cal.com, HubSpot, GoHighLevel, Mailchimp, Twilio, and most popular form/booking/CRM tools. If you use something else, ask—we likely support it.',
+    answer: 'Calendly, Formspree, Tally, Typeform, Zapier, Make, Mailchimp, Google Analytics, and most popular form/booking tools. If you use something else, ask—we likely support it.',
   },
   {
     question: 'Will this help with SEO?',

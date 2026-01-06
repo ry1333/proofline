@@ -1,11 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, CreditCard } from 'lucide-react';
 import { Section, Button, Badge, staggerContainer, fadeInUp } from './ui/Shared';
 import PricingTierCard from './pricing/PricingTierCard';
 import ComparisonTable from './pricing/ComparisonTable';
 import FAQAccordion from './pricing/FAQAccordion';
-import StickyCTA from './pricing/StickyCTA';
 import {
   tiers,
   retainers,
@@ -23,14 +23,18 @@ import { trackBookCallClick, trackRunAuditClick, trackRetainerInterestClick } fr
 // HERO SECTION
 // ============================================
 const PricingHero: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleBookClick = () => {
     trackBookCallClick('pricing_hero');
-    window.open('https://calendly.com', '_blank');
+    navigate('/contact');
+    setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   const handleAuditClick = () => {
     trackRunAuditClick('pricing_hero');
-    window.location.href = '/#audit-form';
+    navigate('/contact');
+    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   return (
@@ -390,14 +394,18 @@ const FAQSection: React.FC = () => (
 // FINAL CTA SECTION
 // ============================================
 const FinalCTASection: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleBookClick = () => {
     trackBookCallClick('pricing_footer');
-    window.open('https://calendly.com', '_blank');
+    navigate('/contact');
+    setTimeout(() => document.getElementById('calendar')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   const handleAuditClick = () => {
     trackRunAuditClick('pricing_footer');
-    window.location.href = '/#audit-form';
+    navigate('/contact');
+    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   return (
@@ -455,7 +463,6 @@ const FinalCTASection: React.FC = () => {
 const PricingPage: React.FC = () => {
   return (
     <>
-      <StickyCTA showAfterPx={600} />
       <PricingHero />
       <TierCardsSection />
       <CompareTiersSection />
