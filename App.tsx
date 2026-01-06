@@ -10,6 +10,7 @@ import { Footer } from './components/LabAndFAQ';
 import ProcessPage from './components/ProcessPage';
 import ResultsPage from './components/ResultsPage';
 import ResultsDetailPage from './components/ResultsDetailPage';
+import PricingPage from './components/PricingPage';
 
 // Home page content
 const HomePage: React.FC = () => (
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Route path="/process" element={<ProcessPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/results/:slug" element={<ResultsDetailPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Process', href: '/process', isRoute: true },
     { name: 'Results', href: '/results', isRoute: true },
-    { name: 'Pricing', href: '/#pricing', isRoute: false },
+    { name: 'Pricing', href: '/pricing', isRoute: true },
     { name: 'Evidence', href: '/#lab', isRoute: false },
   ];
 
