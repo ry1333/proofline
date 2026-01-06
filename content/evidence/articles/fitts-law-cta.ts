@@ -1,179 +1,152 @@
 import { Article } from '../types';
 
 export const fittsLawCta: Article = {
-  title: "Fitts's Law: Make Your CTA Unmissable (Without Looking Spammy)",
-  description: "The science of tap targets and button design. Learn how size, placement, and contrast affect click rates—and how to apply these principles without overwhelming your visitors.",
+  title: "Fitts's Law: Why Button Size and Placement Matter",
+  description: "The time to reach a target is a function of distance and size. Research from 1954 still defines how we design clickable elements today.",
   slug: 'fitts-law-cta',
-  date: '2024-10-20',
-  tags: ['Copy', 'Clarity', 'Mobile'],
+  date: '2024-10-28',
+  tags: ['Friction', 'Mobile', 'Clarity'],
   readingTime: 5,
   featured: false,
+  sourceIds: ['fitts-1954', 'nng-fitts-law'],
+  citations: [
+    { key: '1', sourceId: 'fitts-1954', usedFor: 'Original research on movement time and target acquisition' },
+    { key: '2', sourceId: 'nng-fitts-law', usedFor: 'UX applications and practical guidelines' },
+  ],
   keyTakeaways: [
-    "Fitts's Law: Larger, closer targets are easier to click—but there are diminishing returns",
-    "Mobile tap targets should be at least 44x44 pixels; smaller buttons frustrate users and hurt conversions",
-    "Sticky CTAs can increase engagement when done tastefully, but aggressive implementation backfires"
+    "Movement time increases with distance and decreases with target size [1]",
+    "Larger buttons and closer placement reduce interaction cost [2]",
+    "On mobile, tap targets should be at least 48×48 pixels for reliable interaction",
   ],
   sections: [
     {
       type: 'heading',
       level: 2,
-      content: 'Tap Targets and Mobile Realities'
+      content: 'The Original Research'
     },
     {
       type: 'paragraph',
-      content: "Fitts's Law, developed by psychologist Paul Fitts, describes the time required to move to a target area: larger targets that are closer to the starting position are easier to hit. In web design, this translates directly to button size and placement."
+      content: "In 1954, psychologist Paul Fitts published research in the Journal of Experimental Psychology on human motor control that would eventually become foundational to interface design. His key finding: the time required to move to a target depends on the distance to the target and the size of the target.",
+      cite: '1'
+    },
+    {
+      type: 'stat',
+      content: "Fitts's Law formula: MT = a + b × log₂(2D/W), where MT is movement time, D is distance, and W is target width.",
+      cite: '1'
     },
     {
       type: 'paragraph',
-      content: "On mobile devices, this matters enormously. Thumbs are imprecise instruments. Tap targets that work fine with a mouse cursor become frustrating on a phone screen. If visitors have to zoom in or repeatedly tap to hit your button, you're losing conversions."
+      content: "The practical implication: larger targets that are closer to the user's current position are faster and easier to interact with. This applies to mouse cursors, touch screens, and any pointing interaction."
+    },
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Why This Matters for Conversion'
+    },
+    {
+      type: 'paragraph',
+      content: "Every interaction on your website has a cost. Fitts's Law quantifies part of that cost: the physical effort required to reach and click a target. When buttons are small or far from where users expect them, you're adding unnecessary friction.",
+      cite: '2'
     },
     {
       type: 'lab-note',
-      title: 'The 44px Standard',
-      content: "Apple's Human Interface Guidelines recommend a minimum tap target of 44x44 points. Google suggests 48x48 CSS pixels. These aren't arbitrary—they're based on ergonomic research about average finger size and touch accuracy."
-    },
-    {
-      type: 'paragraph',
-      content: "Small buttons don't just frustrate users—they signal low importance. A tiny 'Contact Us' link tucked in a corner suggests you don't actually want visitors to contact you."
+      title: 'Mobile Impact',
+      content: "Fitts's Law is especially critical on mobile. Thumbs are imprecise, screens are small, and users are often in distracting environments. A button that's easy to tap on desktop can be frustrating on mobile, leading to mis-taps and abandonment.",
+      cite: '2'
     },
     {
       type: 'heading',
       level: 2,
-      content: 'Button Size, Contrast, and Placement'
+      content: 'Applying Fitts\'s Law to CTAs'
     },
     {
       type: 'heading',
       level: 3,
-      content: 'Size'
+      content: 'Make Buttons Larger'
     },
     {
       type: 'paragraph',
-      content: "Your primary CTA should be one of the largest clickable elements on the page. This doesn't mean obnoxiously huge—but it should be clearly more prominent than secondary actions and navigation links."
+      content: "Bigger targets are faster to reach and less error-prone. Nielsen Norman Group recommends minimum tap targets of 1cm × 1cm (roughly 48×48 pixels) with adequate spacing between targets.",
+      cite: '2'
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Place CTAs Strategically'
+    },
+    {
+      type: 'paragraph',
+      content: "Distance matters. On desktop, corners and edges of the screen are \"infinite targets\"—users can slam the cursor in that direction without overshooting. On mobile, the lower center of the screen is in the natural thumb zone."
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: 'Consider the Flow'
+    },
+    {
+      type: 'paragraph',
+      content: "Where will the user's cursor or thumb be when they're ready to click? After reading a form, their attention is at the bottom. After scrolling through benefits, they're likely center-screen. Place CTAs in the path they're already on."
+    },
+    {
+      type: 'heading',
+      level: 2,
+      content: 'Common Fitts\'s Law Violations'
     },
     {
       type: 'list',
       content: [
-        'Primary CTAs: At least 44px tall on mobile, with generous horizontal padding',
-        'Secondary CTAs: Slightly smaller than primary, but still easily tappable',
-        'Text links: Reserve for low-priority actions',
-        'Use padding generously: It increases the tap target without making the button text huge'
-      ]
-    },
-    {
-      type: 'heading',
-      level: 3,
-      content: 'Contrast'
-    },
-    {
-      type: 'paragraph',
-      content: "Buttons need to visually stand out from their surroundings. On a dark site like this one, a bright accent color (like green) creates immediate visual distinction. The button should be the first thing the eye lands on in its section."
-    },
-    {
-      type: 'paragraph',
-      content: "Check contrast ratios for accessibility. The text on your button needs to be readable—WCAG guidelines recommend at least 4.5:1 contrast for normal text, 3:1 for large text."
-    },
-    {
-      type: 'heading',
-      level: 3,
-      content: 'Placement'
-    },
-    {
-      type: 'paragraph',
-      content: "Users expect CTAs in certain locations: after headline/value proposition, at the end of content sections, and in a fixed header or footer. Placing buttons where visitors already look reduces the distance their attention must travel."
-    },
-    {
-      type: 'list',
-      content: [
-        'Above the fold: At least one CTA should be visible without scrolling',
-        'After value proposition: Once you\'ve explained the benefit, offer the action',
-        'End of sections: Natural pause points where visitors decide what to do next',
-        'Repeated at intervals: Long pages benefit from periodic CTA reminders'
+        'Tiny \"Submit\" buttons on forms that don\'t scale with the form width',
+        'Text links instead of buttons for important actions',
+        'CTAs buried in corners away from the content that motivated the click',
+        'Touch targets with insufficient padding between them (causing mis-taps)',
+        'Floating action buttons placed in thumb-unfriendly zones on mobile'
       ]
     },
     {
       type: 'heading',
       level: 2,
-      content: 'Sticky CTA Bars Done Right'
+      content: 'Practical Guidelines'
     },
     {
       type: 'paragraph',
-      content: "Sticky CTAs—fixed headers or footers that stay visible while scrolling—can significantly increase engagement. They keep the action always within reach. But they can also annoy visitors if done poorly."
-    },
-    {
-      type: 'heading',
-      level: 3,
-      content: 'Good Sticky CTA Practices'
+      content: "Based on Fitts's Law and usability research, here are concrete recommendations:",
+      cite: '2'
     },
     {
       type: 'list',
       content: [
-        'Keep it minimal: One or two buttons, not a full navigation bar',
-        'Make it dismissible: Or at least unobtrusive enough that it doesn\'t frustrate',
-        'Delay appearance: Show it after the visitor has scrolled past the hero CTA',
-        'Don\'t cover content: The bar should be slim and positioned where it won\'t interfere',
-        'Match the page design: It should feel integrated, not bolted on'
+        'Desktop buttons: Minimum 44×44 pixels, ideally larger for primary CTAs',
+        'Mobile tap targets: Minimum 48×48 pixels with 8px spacing between targets',
+        'Form submit buttons: Full width or at least as wide as the longest input field',
+        'Sticky CTAs: Consider fixed-position buttons for long pages',
+        'Cursor proximity: Place secondary actions near primary ones when both are relevant'
       ]
-    },
-    {
-      type: 'heading',
-      level: 3,
-      content: 'What to Avoid'
-    },
-    {
-      type: 'list',
-      content: [
-        'Massive sticky bars that eat up screen real estate',
-        'Multiple competing sticky elements (chat widget + CTA bar + cookie banner)',
-        'Aggressive colors or animations that distract from content',
-        'Sticky elements that cover form fields or important content'
-      ]
-    },
-    {
-      type: 'lab-note',
-      title: 'Test Your Mobile Experience',
-      content: "Load your site on your phone and try to use it. Can you easily tap the main CTA with your thumb? Does the sticky bar cover content or form fields? Does it feel helpful or annoying? Your gut reaction is probably similar to your visitors'."
-    },
-    {
-      type: 'heading',
-      level: 2,
-      content: 'Implementation Checklist'
     },
     {
       type: 'checklist',
-      title: "Apply Fitts's Law",
+      title: 'Implementation Checklist',
       content: [
-        'Audit button sizes: Are all tap targets at least 44px?',
-        'Check contrast: Do CTAs visually pop from the background?',
-        'Review placement: Is there a CTA above the fold?',
-        'Test on mobile: Can you easily tap the main CTA with your thumb?',
-        'Consider a sticky CTA: Would it help or annoy?',
-        'Watch session recordings: Do visitors struggle to hit buttons?'
+        'Measure your CTA buttons: Are they at least 44×44px on desktop?',
+        'Test on mobile: Can you reliably tap buttons with your thumb?',
+        'Check spacing: Is there enough room between tap targets?',
+        'Review form flow: Is the submit button easy to reach after filling fields?',
+        'Consider sticky CTAs: Would a fixed button help on longer pages?'
       ]
     },
     {
-      type: 'heading',
-      level: 2,
-      content: 'What We Measure'
-    },
-    {
       type: 'measurement',
-      title: 'Key Events',
+      title: 'What We Measure',
       content: [
-        'cta_click_by_location: Which button placements drive action?',
-        'sticky_cta_click: Does the sticky bar contribute to conversions?',
-        'rage_clicks: Multiple clicks in same area (indicates frustration)',
-        'mobile_vs_desktop: Conversion rate by device type'
+        'cta_click: Conversion on primary buttons',
+        'rage_clicks: Repeated rapid clicks indicating frustration',
+        'mis_tap_rate: Clicks on elements adjacent to the intended target',
+        'time_to_click: Correlation between button size/position and click speed',
+        'mobile_vs_desktop: Conversion rate differences by device type'
       ]
     },
     {
       type: 'paragraph',
-      content: "Fitts's Law is about making action easy. When the path from attention to click is frictionless, more visitors become leads."
+      content: "Fitts's Law reminds us that interface design is physical. The easier you make it to reach and click your most important elements, the more people will do so."
     }
-  ],
-  furtherReading: [
-    'Apple Human Interface Guidelines: Touch targets',
-    'Google Material Design: Touch and click targets',
-    'Nielsen Norman Group: Mobile usability',
-    'Baymard Institute: Mobile UX research'
   ]
 };

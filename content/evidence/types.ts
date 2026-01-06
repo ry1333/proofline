@@ -11,6 +11,13 @@ export type EvidenceTag =
   | 'Mobile'
   | 'Automation';
 
+// Citation reference within article content
+export interface Citation {
+  key: string; // e.g., "1", "2" - displayed as [1], [2]
+  sourceId: string; // Reference to source in sources.ts
+  usedFor?: string; // Optional: what claim this citation supports
+}
+
 export interface ArticleFrontmatter {
   title: string;
   description: string;
@@ -22,13 +29,17 @@ export interface ArticleFrontmatter {
   cover?: string;
   canonical?: string;
   draft?: boolean;
+  // Citation system
+  sourceIds?: string[]; // Array of source IDs from sources.ts
+  citations?: Citation[]; // Detailed citation mapping
 }
 
 export interface ArticleSection {
-  type: 'heading' | 'paragraph' | 'list' | 'lab-note' | 'checklist' | 'measurement' | 'quote' | 'key-takeaways';
+  type: 'heading' | 'paragraph' | 'list' | 'lab-note' | 'checklist' | 'measurement' | 'quote' | 'key-takeaways' | 'stat';
   level?: 2 | 3; // for headings
   content: string | string[];
   title?: string; // for callouts
+  cite?: string; // Citation key for inline reference, e.g., "1" renders as [1]
 }
 
 export interface Article extends ArticleFrontmatter {

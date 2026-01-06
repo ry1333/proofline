@@ -8,7 +8,11 @@ import { hicksLaw } from './articles/hicks-law';
 import { trustSignals } from './articles/trust-signals';
 import { fittsLawCta } from './articles/fitts-law-cta';
 import { messageMatch } from './articles/message-match';
-import { aboveTheFold, formFriction, caseStudiesThatSell } from './articles/stubs';
+import { formFriction } from './articles/form-friction';
+import { speedMatters } from './articles/speed-matters';
+
+// Re-export sources
+export * from './sources';
 
 // All articles (including drafts)
 const allArticlesRaw: Article[] = [
@@ -18,9 +22,8 @@ const allArticlesRaw: Article[] = [
   trustSignals,
   fittsLawCta,
   messageMatch,
-  aboveTheFold,
   formFriction,
-  caseStudiesThatSell,
+  speedMatters,
 ];
 
 // Published articles only (sorted by date, newest first)

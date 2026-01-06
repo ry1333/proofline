@@ -14,7 +14,7 @@ import {
 import { trackBookCallClick, trackRunAuditClick } from '../utils/analytics';
 
 // ============================================
-// PAGE HEADER - Clean, simple
+// PAGE HEADER - FUI Style
 // ============================================
 const PageHeader: React.FC = () => (
   <Section className="pt-32 pb-8">
@@ -24,13 +24,14 @@ const PageHeader: React.FC = () => (
       transition={{ duration: 0.5 }}
       className="max-w-3xl"
     >
-      <p className="text-brand-accent font-medium mb-3">The Lab</p>
-      <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-        Evidence-Based UX
+      <p className="font-mono text-[10px] text-brand-accent uppercase tracking-[0.2em] mb-3">
+        // THE LAB
+      </p>
+      <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+        Evidence
       </h1>
       <p className="text-xl text-gray-400 leading-relaxed">
-        Research-informed principles for building websites that convert.
-        We test and measure everything.
+        Research-informed UX principles—validated through measurement.
       </p>
     </motion.div>
   </Section>
@@ -46,9 +47,12 @@ const FeaturedSection: React.FC = () => {
 
   return (
     <Section className="py-8">
-      <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-6">
-        Featured Articles
-      </h2>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
+        <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
+          Featured Research
+        </h2>
+      </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {featured.slice(0, 3).map((article, idx) => (
           <EvidenceArticleCard key={article.slug} article={article} index={idx} featured />
@@ -72,7 +76,17 @@ const LibrarySection: React.FC = () => {
 
   return (
     <Section className="py-12 border-t border-white/5">
-      <h2 className="text-2xl font-bold text-white mb-8">All Articles</h2>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
+          <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
+            All Articles
+          </h2>
+        </div>
+        <span className="font-mono text-[10px] text-gray-600">
+          {filteredArticles.length} article{filteredArticles.length !== 1 ? 's' : ''}
+        </span>
+      </div>
 
       {/* Filters */}
       <div className="mb-8 space-y-4">
@@ -96,7 +110,13 @@ const LibrarySection: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-white/[0.02] rounded-lg border border-white/5">
+        <div className="relative text-center py-16 bg-white/[0.02] border border-white/10 rounded-lg">
+          {/* Corner accents */}
+          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
           <p className="text-gray-400 mb-4">No articles found matching your criteria.</p>
           <button
             onClick={() => {
@@ -114,44 +134,55 @@ const LibrarySection: React.FC = () => {
 };
 
 // ============================================
-// CTA SECTION - Simple and clean
+// CTA SECTION - FUI Style
 // ============================================
 const CTASection: React.FC = () => {
   const handleBookClick = () => {
-    trackBookCallClick('pricing_footer');
+    trackBookCallClick('evidence_hub');
     window.open('https://calendly.com', '_blank');
   };
 
   const handleAuditClick = () => {
-    trackRunAuditClick('pricing_footer');
+    trackRunAuditClick('evidence_hub');
     window.location.href = '/#audit-form';
   };
 
   return (
-    <Section className="py-20 border-t border-white/5">
+    <Section className="py-16 border-t border-white/5">
       <motion.div
-        className="text-center max-w-2xl mx-auto"
+        className="relative border border-brand-accent/30 bg-brand-accent/[0.02] p-8 md:p-10 text-center max-w-3xl mx-auto rounded-lg"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold text-white mb-4">
+        {/* Corner markers */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-brand-accent"></div>
+        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-brand-accent"></div>
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-brand-accent"></div>
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-brand-accent"></div>
+
+        <div className="mb-4">
+          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-[0.2em]">
+            // APPLY THESE PRINCIPLES
+          </span>
+        </div>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
           Want us to apply these principles to your site?
-        </h2>
-        <p className="text-gray-400 mb-8">
+        </h3>
+
+        <p className="text-gray-400 mb-8 max-w-xl mx-auto">
           Get a custom audit or book a discovery call to discuss your project.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-          <Button size="lg" onClick={handleBookClick}>
-            Book a 15-min Call
-          </Button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+          <Button size="lg" onClick={handleBookClick}>Book a 15-min Call</Button>
           <Button size="lg" variant="secondary" onClick={handleAuditClick}>
             Run Free Audit
           </Button>
         </div>
 
-        <p className="text-sm text-gray-500">
+        <p className="font-mono text-[10px] text-gray-600 uppercase tracking-wider">
           Free audit delivered in 24–48h. No spam.
         </p>
       </motion.div>
@@ -160,12 +191,12 @@ const CTASection: React.FC = () => {
 };
 
 // ============================================
-// DISCLAIMER - Subtle
+// DISCLAIMER
 // ============================================
 const Disclaimer: React.FC = () => (
   <div className="text-center py-4 border-t border-white/5">
-    <p className="text-xs text-gray-600">
-      Principles are research-informed. Outcomes depend on offer, traffic, and execution. We instrument and test.
+    <p className="font-mono text-[9px] text-gray-600 uppercase tracking-wider">
+      // Principles are research-informed. Outcomes depend on offer, traffic, and execution.
     </p>
   </div>
 );

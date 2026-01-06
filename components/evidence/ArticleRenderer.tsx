@@ -1,42 +1,69 @@
 import React from 'react';
-import { Lightbulb, CheckCircle, BarChart3, Quote } from 'lucide-react';
+import { Lightbulb, CheckCircle, BarChart3, TrendingUp } from 'lucide-react';
 import { ArticleSection } from '../../content/evidence';
 
 // ============================================
-// CALLOUT COMPONENTS - Clean, readable style
+// INLINE CITATION COMPONENT
+// ============================================
+const InlineCite: React.FC<{ cite: string }> = ({ cite }) => (
+  <sup className="font-mono text-[10px] text-brand-accent hover:text-white transition-colors cursor-pointer ml-0.5">
+    [{cite}]
+  </sup>
+);
+
+// Helper to render content with optional citation
+const ContentWithCite: React.FC<{ content: string; cite?: string }> = ({ content, cite }) => (
+  <>
+    {content}
+    {cite && <InlineCite cite={cite} />}
+  </>
+);
+
+// ============================================
+// CALLOUT COMPONENTS - FUI style with readability
 // ============================================
 
 interface CalloutProps {
   title?: string;
   children: React.ReactNode;
+  cite?: string;
 }
 
-export const LabNote: React.FC<CalloutProps> = ({ title, children }) => (
-  <div className="my-8 bg-brand-accent/5 border-l-4 border-brand-accent rounded-r-lg p-5">
+export const LabNote: React.FC<CalloutProps> = ({ title, children, cite }) => (
+  <div className="my-8 relative bg-brand-accent/5 border border-brand-accent/20 rounded-lg p-5">
+    {/* Corner accents */}
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-accent/50"></div>
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-accent/50"></div>
+
     <div className="flex items-center gap-2 mb-2">
-      <Lightbulb size={18} className="text-brand-accent" />
-      <span className="font-semibold text-white text-sm">
+      <Lightbulb size={16} className="text-brand-accent" />
+      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
         {title || 'Key Insight'}
       </span>
     </div>
     <div className="text-gray-300 text-[15px] leading-relaxed">
       {children}
+      {cite && <InlineCite cite={cite} />}
     </div>
   </div>
 );
 
 export const Checklist: React.FC<CalloutProps & { items: string[] }> = ({ title, items }) => (
-  <div className="my-8 bg-white/[0.02] border border-white/10 rounded-lg p-5">
+  <div className="my-8 relative bg-white/[0.02] border border-white/10 rounded-lg p-5">
+    {/* Corner accents */}
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+
     <div className="flex items-center gap-2 mb-4">
-      <CheckCircle size={18} className="text-brand-accent" />
-      <span className="font-semibold text-white">
-        {title || 'Checklist'}
+      <CheckCircle size={16} className="text-brand-accent" />
+      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
+        {title || 'Implementation Checklist'}
       </span>
     </div>
     <ul className="space-y-3">
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3 text-gray-300">
-          <span className="w-5 h-5 rounded border border-white/20 flex-shrink-0 mt-0.5 flex items-center justify-center text-[10px] text-gray-500">
+          <span className="w-5 h-5 rounded border border-brand-accent/30 bg-brand-accent/5 flex-shrink-0 mt-0.5 flex items-center justify-center font-mono text-[10px] text-brand-accent">
             {idx + 1}
           </span>
           <span className="text-[15px] leading-relaxed">{item}</span>
@@ -47,22 +74,26 @@ export const Checklist: React.FC<CalloutProps & { items: string[] }> = ({ title,
 );
 
 export const Measurement: React.FC<CalloutProps & { items: string[] }> = ({ title, items }) => (
-  <div className="my-8 bg-white/[0.02] border border-white/10 rounded-lg p-5">
+  <div className="my-8 relative bg-white/[0.02] border border-white/10 rounded-lg p-5">
+    {/* Corner accents */}
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+
     <div className="flex items-center gap-2 mb-4">
-      <BarChart3 size={18} className="text-brand-accent" />
-      <span className="font-semibold text-white">
+      <BarChart3 size={16} className="text-brand-accent" />
+      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
         {title || 'What We Measure'}
       </span>
     </div>
     <div className="grid gap-2">
       {items.map((item, idx) => (
         <div key={idx} className="flex items-center gap-2 text-gray-300 text-[15px]">
-          <span className="text-brand-accent">→</span>
-          <code className="text-gray-400 bg-black/30 px-1.5 py-0.5 rounded text-sm">
+          <span className="text-brand-accent font-mono text-xs">→</span>
+          <code className="text-brand-accent bg-black/30 px-1.5 py-0.5 rounded font-mono text-xs">
             {item.split(':')[0]}
           </code>
           {item.includes(':') && (
-            <span className="text-gray-500">{item.split(':').slice(1).join(':')}</span>
+            <span className="text-gray-400">{item.split(':').slice(1).join(':')}</span>
           )}
         </div>
       ))}
@@ -70,22 +101,31 @@ export const Measurement: React.FC<CalloutProps & { items: string[] }> = ({ titl
   </div>
 );
 
-export const BlockQuote: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <blockquote className="my-8 pl-5 border-l-2 border-gray-600">
-    <p className="text-lg text-gray-300 italic leading-relaxed">{children}</p>
+export const BlockQuote: React.FC<{ children: React.ReactNode; cite?: string }> = ({ children, cite }) => (
+  <blockquote className="my-8 pl-5 border-l-2 border-brand-accent/50 bg-white/[0.01] py-4 pr-4 rounded-r">
+    <p className="text-lg text-gray-300 italic leading-relaxed">
+      {children}
+      {cite && <InlineCite cite={cite} />}
+    </p>
   </blockquote>
 );
 
 export const KeyTakeaways: React.FC<{ items: string[] }> = ({ items }) => (
-  <div className="my-8 bg-brand-accent/5 border border-brand-accent/20 rounded-lg p-6">
-    <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
+  <div className="my-8 relative bg-brand-accent/5 border border-brand-accent/20 rounded-lg p-6">
+    {/* Corner accents */}
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-accent/50"></div>
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-accent/50"></div>
+    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-accent/50"></div>
+    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-accent/50"></div>
+
+    <h4 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider mb-4 flex items-center gap-2">
       <span className="w-1.5 h-1.5 bg-brand-accent rounded-full"></span>
       Key Takeaways
     </h4>
     <ul className="space-y-3">
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3 text-gray-200">
-          <span className="text-brand-accent font-bold mt-0.5">•</span>
+          <span className="text-brand-accent font-mono text-sm mt-0.5">•</span>
           <span className="text-[15px] leading-relaxed">{item}</span>
         </li>
       ))}
@@ -94,7 +134,20 @@ export const KeyTakeaways: React.FC<{ items: string[] }> = ({ items }) => (
 );
 
 // ============================================
-// ARTICLE SECTION RENDERER - Clean typography
+// STAT CALLOUT - For cited statistics
+// ============================================
+export const StatCallout: React.FC<{ content: string; cite?: string }> = ({ content, cite }) => (
+  <div className="my-6 flex items-center gap-3 p-4 bg-brand-accent/5 border border-brand-accent/20 rounded-lg">
+    <TrendingUp size={20} className="text-brand-accent flex-shrink-0" />
+    <p className="text-white font-medium">
+      {content}
+      {cite && <InlineCite cite={cite} />}
+    </p>
+  </div>
+);
+
+// ============================================
+// ARTICLE SECTION RENDERER
 // ============================================
 
 interface ArticleRendererProps {
@@ -123,8 +176,13 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ sections }) => {
           case 'paragraph':
             return (
               <p key={idx} className="text-gray-300 text-[16px] leading-[1.8] mb-5">
-                {section.content as string}
+                <ContentWithCite content={section.content as string} cite={section.cite} />
               </p>
+            );
+
+          case 'stat':
+            return (
+              <StatCallout key={idx} content={section.content as string} cite={section.cite} />
             );
 
           case 'list':
@@ -141,7 +199,7 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ sections }) => {
 
           case 'lab-note':
             return (
-              <LabNote key={idx} title={section.title}>
+              <LabNote key={idx} title={section.title} cite={section.cite}>
                 {section.content as string}
               </LabNote>
             );
@@ -157,7 +215,7 @@ const ArticleRenderer: React.FC<ArticleRendererProps> = ({ sections }) => {
             );
 
           case 'quote':
-            return <BlockQuote key={idx}>{section.content as string}</BlockQuote>;
+            return <BlockQuote key={idx} cite={section.cite}>{section.content as string}</BlockQuote>;
 
           case 'key-takeaways':
             return <KeyTakeaways key={idx} items={section.content as string[]} />;

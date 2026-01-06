@@ -1,161 +1,144 @@
 import { Article } from '../types';
 
 export const cognitiveLoad: Article = {
-  title: 'Cognitive Load: Why Simple Pages Convert Better',
-  description: 'Your visitors have limited mental bandwidth. Every element on your page competes for it. Learn how to reduce friction and increase conversions by designing for how the brain actually works.',
+  title: 'Cognitive Load: Why Simpler Pages Convert Better',
+  description: 'Research from Nielsen Norman Group shows that reducing mental effort directly improves usability and conversion. Here\'s how to apply cognitive load theory to your website.',
   slug: 'cognitive-load',
   date: '2024-11-10',
-  tags: ['Clarity', 'Friction'],
-  readingTime: 7,
+  tags: ['Clarity', 'Friction', 'Copy'],
+  readingTime: 6,
   featured: true,
+  sourceIds: ['nng-cognitive-load', 'nng-form-cognitive-load'],
+  citations: [
+    { key: '1', sourceId: 'nng-cognitive-load', usedFor: 'Cognitive load theory in UX' },
+    { key: '2', sourceId: 'nng-form-cognitive-load', usedFor: 'Form-specific cognitive load principles' },
+  ],
   keyTakeaways: [
-    'The brain can only process a limited amount of information at once—every extra element on your page uses up that capacity',
-    'Visitors make decisions faster and convert more often when pages have clear visual hierarchy and fewer choices',
-    'The "one primary CTA per screen" rule eliminates decision paralysis and guides visitors toward action'
+    'Every element on a page competes for the same limited mental resources [1]',
+    'Reducing cognitive load is about elimination, not just simplification',
+    'Form design is particularly sensitive to cognitive load—each field adds friction [2]',
   ],
   sections: [
     {
       type: 'heading',
       level: 2,
-      content: 'The Brain Hates Decisions Under Uncertainty'
+      content: 'What Is Cognitive Load?'
     },
     {
       type: 'paragraph',
-      content: "Cognitive load refers to the amount of mental effort required to process information. Your working memory—the part of your brain that handles active thinking—has severe limitations. It can only hold a few items at once, and it tires quickly."
+      content: "Cognitive load refers to the amount of mental effort required to process information. In the context of web design, it's the mental work a visitor must do to understand your page, evaluate your offer, and take action."
     },
     {
       type: 'paragraph',
-      content: "When someone lands on your website, their brain immediately starts processing: What is this? Is it relevant to me? What should I do next? Every element on your page—images, text, buttons, navigation, animations—adds to that processing burden."
+      content: "According to Nielsen Norman Group, cognitive load in UX comes from three sources: intrinsic load (the inherent complexity of the task), extraneous load (unnecessary complexity added by poor design), and germane load (effort spent learning and forming mental models).",
+      cite: '1'
     },
     {
       type: 'lab-note',
-      title: 'Three Types of Cognitive Load',
-      content: "Intrinsic load is the inherent complexity of the task (understanding your service). Extraneous load is friction from poor design (confusing layout, unclear copy). Germane load is the effort of building understanding (reading your value proposition). Good design minimizes extraneous load so visitors can focus on what matters."
-    },
-    {
-      type: 'paragraph',
-      content: "When cognitive load exceeds capacity, people don't just slow down—they bail. They click back to Google. They close the tab. They leave without taking action, even if your offer would have been perfect for them."
+      title: 'The Key Insight',
+      content: "Your visitors have limited mental bandwidth. Every element on your page—every option, every piece of text, every design flourish—competes for that same limited resource. The page that wins is the one that makes the desired action feel effortless.",
+      cite: '1'
     },
     {
       type: 'heading',
       level: 2,
-      content: 'Remove Choices, Shorten Scanning'
+      content: 'How Cognitive Overload Kills Conversions'
     },
     {
       type: 'paragraph',
-      content: "The most effective way to reduce cognitive load is to remove unnecessary elements. This isn't about making your page sparse or boring—it's about ruthless prioritization."
-    },
-    {
-      type: 'paragraph',
-      content: "Ask yourself: Does this element directly support the goal of the page? If not, it's adding load without adding value."
+      content: "When cognitive load exceeds capacity, visitors don't just slow down—they leave. The brain's response to overwhelm is often to avoid the decision entirely. This manifests as:"
     },
     {
       type: 'list',
       content: [
-        'Remove competing CTAs: If you want someone to book a call, don\'t also ask them to sign up for a newsletter, follow you on social media, and read your blog',
-        'Reduce navigation options: Your header doesn\'t need 12 links. Most visitors only need 3-4 paths',
-        'Cut filler content: Generic stock photos, meaningless taglines, and "welcome to our website" text all add load without adding value',
-        'Simplify forms: Every field is a micro-decision. Ask for the minimum you need to take the next step'
+        'High bounce rates on pages with too much information',
+        'Form abandonment when fields feel overwhelming',
+        'Decision paralysis when options are unclear or too numerous',
+        'Reduced trust when the page feels cluttered or confusing'
       ]
     },
     {
       type: 'heading',
       level: 2,
-      content: 'The One Primary CTA Per Screen Rule'
-    },
-    {
-      type: 'paragraph',
-      content: "One of the most impactful changes you can make is committing to a single primary call-to-action per viewport. This doesn't mean you can only have one button on the page—it means that at any given scroll position, there should be one clear next step."
-    },
-    {
-      type: 'paragraph',
-      content: "When visitors see multiple CTAs of equal visual weight, they have to decide which one to click. That decision uses cognitive resources and creates friction. Many will choose neither."
-    },
-    {
-      type: 'lab-note',
-      title: 'Primary vs Secondary',
-      content: "It's fine to have a secondary CTA (like 'Learn more' alongside 'Book a call'), but the visual hierarchy must be clear. Primary CTAs get high contrast, larger size, and prominent placement. Secondary CTAs should be visually subdued."
-    },
-    {
-      type: 'heading',
-      level: 2,
-      content: 'Practical Before/After Examples'
+      content: 'Reducing Cognitive Load: Four Principles'
     },
     {
       type: 'heading',
       level: 3,
-      content: 'Navigation'
+      content: '1. Eliminate Before You Simplify'
     },
     {
       type: 'paragraph',
-      content: "Before: Home | About | Services | Blog | Resources | Portfolio | Testimonials | Contact | FAQ | Careers"
-    },
-    {
-      type: 'paragraph',
-      content: "After: Services | Results | Pricing | Contact"
-    },
-    {
-      type: 'paragraph',
-      content: "The streamlined navigation reduces choices by 60% while still providing access to everything visitors actually need."
+      content: "The most effective way to reduce cognitive load is to remove elements entirely. Before asking \"how can I make this simpler?\", ask \"do I need this at all?\" Every navigation item, every section, every word should justify its existence."
     },
     {
       type: 'heading',
       level: 3,
-      content: 'Hero Section'
+      content: '2. Use Recognition Over Recall'
     },
     {
       type: 'paragraph',
-      content: "Before: Headline, subhead, three bullet points, video embed, two CTAs (Contact Us + Watch Demo), trust badges, and a scrolling testimonial."
+      content: "Recognizing something is easier than remembering it. This principle supports using clear labels, visible options, and consistent patterns. Don't make visitors remember information from earlier—show it to them.",
+      cite: '1'
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: '3. Chunk Information'
     },
     {
       type: 'paragraph',
-      content: "After: Clear headline, supporting subhead, one primary CTA, and a simple trust indicator."
+      content: "Break complex information into smaller, digestible pieces. Group related items together. Use visual hierarchy to show relationships. The goal is to let visitors process one chunk at a time rather than everything at once."
+    },
+    {
+      type: 'heading',
+      level: 3,
+      content: '4. Reduce Form Friction'
     },
     {
       type: 'paragraph',
-      content: "The simplified hero focuses attention on the value proposition and desired action. Everything else moves below the fold."
+      content: "Forms are particularly sensitive to cognitive load. Nielsen Norman Group identifies four key principles for form design: minimize the number of fields, use clear and specific labels, provide inline validation, and maintain a logical order.",
+      cite: '2'
+    },
+    {
+      type: 'stat',
+      content: 'Each additional form field increases the mental effort required and raises the likelihood of abandonment.',
+      cite: '2'
     },
     {
       type: 'heading',
       level: 2,
-      content: 'Implementation Checklist'
+      content: 'Applying This to Your Website'
+    },
+    {
+      type: 'paragraph',
+      content: "Audit your key pages through the lens of cognitive load. For each element, ask: Does this help the visitor take the action I want? If the answer isn't a clear yes, it's a candidate for removal."
     },
     {
       type: 'checklist',
-      title: 'Reduce Cognitive Load',
+      title: 'Implementation Checklist',
       content: [
-        'Audit your navigation: Can you cut it to 4-5 items?',
-        'Review your hero: Is there one clear CTA above the fold?',
-        'Check each section: Does every element support the section goal?',
-        'Count your form fields: Can you remove any?',
-        'Test on mobile: Cognitive load is even more critical on small screens',
-        'Watch session recordings: Where do visitors pause or abandon?'
+        'Audit your homepage: Count every distinct element competing for attention',
+        'Review your forms: Can you remove any fields without losing essential information?',
+        'Check your navigation: Are there items that get minimal clicks but add visual noise?',
+        'Simplify your copy: Can you say the same thing in fewer words?',
+        'Test with fresh eyes: Show the page to someone unfamiliar and watch where they struggle'
       ]
     },
     {
-      type: 'heading',
-      level: 2,
-      content: 'What We Measure'
-    },
-    {
       type: 'measurement',
-      title: 'Key Events',
+      title: 'What We Measure',
       content: [
-        'scroll_depth: How far do visitors scroll before leaving?',
-        'time_to_first_click: How quickly do visitors engage?',
-        'cta_click_rate: Primary CTA clicks / page views',
-        'form_abandonment: Started but not completed',
-        'bounce_rate: Left without any interaction'
+        'time_on_page: How long visitors spend (too long can indicate confusion)',
+        'scroll_depth: Are visitors reaching your CTA?',
+        'form_field_focus_time: Which fields cause hesitation?',
+        'form_abandonment: Where are visitors dropping off?',
+        'click_confusion: Clicks on non-interactive elements indicate unclear hierarchy'
       ]
     },
     {
       type: 'paragraph',
-      content: "Reducing cognitive load isn't about dumbing down your message—it's about respecting your visitors' mental bandwidth. When you make it easy to understand and act, more people will."
+      content: "Reducing cognitive load isn't about making your site boring—it's about making it clear. The clearer the path to conversion, the more visitors will take it."
     }
-  ],
-  furtherReading: [
-    'Nielsen Norman Group: Cognitive load research',
-    'John Sweller: Cognitive load theory',
-    'Steve Krug: Don\'t Make Me Think'
   ]
 };
