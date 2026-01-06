@@ -22,65 +22,56 @@ const EvidenceArticleCard: React.FC<EvidenceArticleCardProps> = ({
 
   return (
     <motion.article
-      className={`group relative border ${
-        featured
-          ? 'border-brand-accent/30 bg-brand-accent/[0.02]'
-          : 'border-brand-border bg-brand-panel'
-      } hover:border-white/20 transition-all duration-300`}
+      className={`group bg-brand-panel border border-brand-border rounded-lg overflow-hidden hover:border-white/20 transition-all duration-300 ${
+        featured ? 'ring-1 ring-brand-accent/20' : ''
+      }`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.05 }}
       viewport={{ once: true }}
     >
-      {/* Corner markers */}
-      <div className={`absolute top-0 left-0 w-2 h-2 border-t border-l ${featured ? 'border-brand-accent/50' : 'border-white/20'} group-hover:border-brand-accent/50 transition-colors`}></div>
-      <div className={`absolute top-0 right-0 w-2 h-2 border-t border-r ${featured ? 'border-brand-accent/50' : 'border-white/20'} group-hover:border-brand-accent/50 transition-colors`}></div>
-      <div className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l ${featured ? 'border-brand-accent/50' : 'border-white/20'} group-hover:border-brand-accent/50 transition-colors`}></div>
-      <div className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r ${featured ? 'border-brand-accent/50' : 'border-white/20'} group-hover:border-brand-accent/50 transition-colors`}></div>
-
       <div className="p-6">
-        {/* Meta row: tags + reading time */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex flex-wrap gap-2">
-            {article.tags.slice(0, 3).map((tag, idx) => (
-              <span
-                key={idx}
-                className="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-brand-accent border border-brand-accent/20 bg-brand-accent/5"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="flex items-center gap-1 text-brand-textDim">
-            <Clock size={12} />
-            <span className="font-mono text-[10px]">{article.readingTime} min</span>
-          </div>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {article.tags.slice(0, 3).map((tag, idx) => (
+            <span
+              key={idx}
+              className="px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-brand-accent bg-brand-accent/10 rounded"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">
-          <Link to={`/evidence/${article.slug}`} onClick={handleClick} className="hover:underline">
+        <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-accent transition-colors leading-tight">
+          <Link to={`/evidence/${article.slug}`} onClick={handleClick}>
             {article.title}
           </Link>
         </h3>
 
         {/* Description */}
-        <p className="text-brand-textDim text-sm mb-4 line-clamp-2">
+        <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
           {article.description}
         </p>
 
-        {/* Footer: date + read link */}
-        <div className="flex items-center justify-between pt-4 border-t border-brand-border/50">
-          <span className="font-mono text-[10px] text-brand-textDim">
-            {formatDate(article.date)}
-          </span>
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <div className="flex items-center gap-3 text-gray-500 text-sm">
+            <span>{formatDate(article.date)}</span>
+            <span>•</span>
+            <div className="flex items-center gap-1">
+              <Clock size={14} />
+              <span>{article.readingTime} min</span>
+            </div>
+          </div>
           <Link
             to={`/evidence/${article.slug}`}
             onClick={handleClick}
-            className="inline-flex items-center gap-1 text-sm font-mono uppercase tracking-wider text-brand-textDim hover:text-brand-accent transition-colors group/link"
+            className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-brand-accent transition-colors"
           >
             Read
-            <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

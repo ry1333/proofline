@@ -1,10 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Lightbulb, CheckSquare, BarChart3, Quote } from 'lucide-react';
+import { Lightbulb, CheckCircle, BarChart3, Quote } from 'lucide-react';
 import { ArticleSection } from '../../content/evidence';
 
 // ============================================
-// CALLOUT COMPONENTS
+// CALLOUT COMPONENTS - Clean, readable style
 // ============================================
 
 interface CalloutProps {
@@ -13,115 +12,89 @@ interface CalloutProps {
 }
 
 export const LabNote: React.FC<CalloutProps> = ({ title, children }) => (
-  <div className="my-8 relative border border-brand-accent/30 bg-brand-accent/[0.02]">
-    {/* Corner markers */}
-    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-accent/50"></div>
-    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-accent/50"></div>
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-accent/50"></div>
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-accent/50"></div>
-
-    <div className="border-b border-brand-accent/20 px-4 py-2 flex items-center gap-2 bg-brand-accent/5">
-      <Lightbulb size={14} className="text-brand-accent" />
-      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-        {title || 'Lab Note'}
+  <div className="my-8 bg-brand-accent/5 border-l-4 border-brand-accent rounded-r-lg p-5">
+    <div className="flex items-center gap-2 mb-2">
+      <Lightbulb size={18} className="text-brand-accent" />
+      <span className="font-semibold text-white text-sm">
+        {title || 'Key Insight'}
       </span>
     </div>
-    <div className="p-4 text-brand-textDim text-sm leading-relaxed">
+    <div className="text-gray-300 text-[15px] leading-relaxed">
       {children}
     </div>
   </div>
 );
 
 export const Checklist: React.FC<CalloutProps & { items: string[] }> = ({ title, items }) => (
-  <div className="my-8 relative border border-brand-border bg-brand-panel">
-    {/* Corner markers */}
-    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
-    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
-
-    <div className="border-b border-brand-border px-4 py-2 flex items-center gap-2">
-      <CheckSquare size={14} className="text-brand-accent" />
-      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-        {title || 'Implementation Checklist'}
+  <div className="my-8 bg-white/[0.02] border border-white/10 rounded-lg p-5">
+    <div className="flex items-center gap-2 mb-4">
+      <CheckCircle size={18} className="text-brand-accent" />
+      <span className="font-semibold text-white">
+        {title || 'Checklist'}
       </span>
     </div>
-    <div className="p-4">
-      <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3 text-sm text-brand-textDim">
-            <span className="text-brand-accent font-mono text-xs mt-0.5">[ ]</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="space-y-3">
+      {items.map((item, idx) => (
+        <li key={idx} className="flex items-start gap-3 text-gray-300">
+          <span className="w-5 h-5 rounded border border-white/20 flex-shrink-0 mt-0.5 flex items-center justify-center text-[10px] text-gray-500">
+            {idx + 1}
+          </span>
+          <span className="text-[15px] leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
 export const Measurement: React.FC<CalloutProps & { items: string[] }> = ({ title, items }) => (
-  <div className="my-8 relative border border-brand-border bg-brand-panel">
-    {/* Corner markers */}
-    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
-    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
-
-    <div className="border-b border-brand-border px-4 py-2 flex items-center gap-2">
-      <BarChart3 size={14} className="text-brand-accent" />
-      <span className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
+  <div className="my-8 bg-white/[0.02] border border-white/10 rounded-lg p-5">
+    <div className="flex items-center gap-2 mb-4">
+      <BarChart3 size={18} className="text-brand-accent" />
+      <span className="font-semibold text-white">
         {title || 'What We Measure'}
       </span>
     </div>
-    <div className="p-4">
-      <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <li key={idx} className="text-sm font-mono text-brand-textDim">
-            <span className="text-brand-accent">→</span> {item}
-          </li>
-        ))}
-      </ul>
+    <div className="grid gap-2">
+      {items.map((item, idx) => (
+        <div key={idx} className="flex items-center gap-2 text-gray-300 text-[15px]">
+          <span className="text-brand-accent">→</span>
+          <code className="text-gray-400 bg-black/30 px-1.5 py-0.5 rounded text-sm">
+            {item.split(':')[0]}
+          </code>
+          {item.includes(':') && (
+            <span className="text-gray-500">{item.split(':').slice(1).join(':')}</span>
+          )}
+        </div>
+      ))}
     </div>
   </div>
 );
 
 export const BlockQuote: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="my-8 pl-4 border-l-2 border-brand-accent/50">
-    <div className="flex gap-2">
-      <Quote size={16} className="text-brand-accent/50 flex-shrink-0 mt-1" />
-      <p className="text-lg text-white/80 italic">{children}</p>
-    </div>
-  </div>
+  <blockquote className="my-8 pl-5 border-l-2 border-gray-600">
+    <p className="text-lg text-gray-300 italic leading-relaxed">{children}</p>
+  </blockquote>
 );
 
 export const KeyTakeaways: React.FC<{ items: string[] }> = ({ items }) => (
-  <div className="my-8 relative border border-brand-accent/40 bg-brand-accent/[0.03]">
-    {/* Corner markers */}
-    <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-brand-accent"></div>
-    <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-brand-accent"></div>
-    <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-brand-accent"></div>
-    <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-brand-accent"></div>
-
-    <div className="border-b border-brand-accent/30 px-5 py-3 bg-brand-accent/5">
-      <span className="font-mono text-xs text-brand-accent uppercase tracking-wider font-bold">
-        Key Takeaways
-      </span>
-    </div>
-    <div className="p-5">
-      <ul className="space-y-3">
-        {items.map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3 text-white">
-            <span className="text-brand-accent font-bold text-lg leading-none">•</span>
-            <span className="text-sm leading-relaxed">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+  <div className="my-8 bg-brand-accent/5 border border-brand-accent/20 rounded-lg p-6">
+    <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
+      <span className="w-1.5 h-1.5 bg-brand-accent rounded-full"></span>
+      Key Takeaways
+    </h4>
+    <ul className="space-y-3">
+      {items.map((item, idx) => (
+        <li key={idx} className="flex items-start gap-3 text-gray-200">
+          <span className="text-brand-accent font-bold mt-0.5">•</span>
+          <span className="text-[15px] leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
 // ============================================
-// ARTICLE SECTION RENDERER
+// ARTICLE SECTION RENDERER - Clean typography
 // ============================================
 
 interface ArticleRendererProps {
@@ -130,36 +103,36 @@ interface ArticleRendererProps {
 
 const ArticleRenderer: React.FC<ArticleRendererProps> = ({ sections }) => {
   return (
-    <div className="prose-container">
+    <div className="article-content">
       {sections.map((section, idx) => {
         switch (section.type) {
           case 'heading':
             if (section.level === 2) {
               return (
-                <h2 key={idx} className="text-2xl font-bold text-white mt-12 mb-4 uppercase tracking-wide">
+                <h2 key={idx} className="text-2xl font-bold text-white mt-12 mb-5 leading-tight">
                   {section.content as string}
                 </h2>
               );
             }
             return (
-              <h3 key={idx} className="text-xl font-bold text-white mt-8 mb-3">
+              <h3 key={idx} className="text-xl font-semibold text-white mt-8 mb-4 leading-tight">
                 {section.content as string}
               </h3>
             );
 
           case 'paragraph':
             return (
-              <p key={idx} className="text-brand-textDim leading-[1.8] mb-6">
+              <p key={idx} className="text-gray-300 text-[16px] leading-[1.8] mb-5">
                 {section.content as string}
               </p>
             );
 
           case 'list':
             return (
-              <ul key={idx} className="mb-6 space-y-2 ml-4">
+              <ul key={idx} className="mb-6 space-y-2.5 ml-1">
                 {(section.content as string[]).map((item, i) => (
-                  <li key={i} className="text-brand-textDim leading-relaxed flex items-start gap-2">
-                    <span className="text-brand-accent mt-1.5">•</span>
+                  <li key={i} className="flex items-start gap-3 text-gray-300 text-[16px] leading-relaxed">
+                    <span className="text-brand-accent mt-2 w-1.5 h-1.5 bg-brand-accent rounded-full flex-shrink-0"></span>
                     <span>{item}</span>
                   </li>
                 ))}
