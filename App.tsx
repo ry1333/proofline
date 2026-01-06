@@ -11,6 +11,8 @@ import ProcessPage from './components/ProcessPage';
 import ResultsPage from './components/ResultsPage';
 import ResultsDetailPage from './components/ResultsDetailPage';
 import PricingPage from './components/PricingPage';
+import EvidenceHub from './components/EvidenceHub';
+import EvidenceArticle from './components/EvidenceArticle';
 
 // Home page content
 const HomePage: React.FC = () => (
@@ -45,6 +47,8 @@ const App: React.FC = () => {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/results/:slug" element={<ResultsDetailPage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/evidence" element={<EvidenceHub />} />
+          <Route path="/evidence/:slug" element={<EvidenceArticle />} />
         </Routes>
       </Layout>
     </BrowserRouter>

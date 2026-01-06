@@ -16,12 +16,12 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Define nav links - some are routes, some are anchor links
+  // Define nav links - all are routes now
   const navLinks = [
     { name: 'Process', href: '/process', isRoute: true },
     { name: 'Results', href: '/results', isRoute: true },
     { name: 'Pricing', href: '/pricing', isRoute: true },
-    { name: 'Evidence', href: '/#lab', isRoute: false },
+    { name: 'Evidence', href: '/evidence', isRoute: true },
   ];
 
   // Check if a route is active (handles both exact and prefix matches)
