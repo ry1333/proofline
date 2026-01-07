@@ -15,6 +15,8 @@ import EvidenceArticle from './components/EvidenceArticle';
 import PrivacyPage from './components/PrivacyPage';
 import TermsPage from './components/TermsPage';
 import NotFoundPage from './components/NotFoundPage';
+import AuditPage from './components/AuditPage';
+import ThanksPage from './components/ThanksPage';
 
 // Home page content
 const HomePage: React.FC = () => (
@@ -52,6 +54,8 @@ const App: React.FC = () => {
           <Route path="/evidence/:slug" element={<EvidenceArticle />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/audit" element={<AuditPage />} />
+          <Route path="/thanks" element={<ThanksPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
