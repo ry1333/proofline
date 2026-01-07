@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>ProofLine</title>
     <script type="text/javascript">
-      // Single Page App redirect for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 1;
+      // SPA redirect for GitHub Pages
+      // Converts path to query string and redirects to index.html
+      // e.g., /proofline/pricing -> /proofline/?/pricing
+      var pathSegmentsToKeep = 1; // Keep /proofline/
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
