@@ -1,20 +1,82 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ProofLine
 
-# Run and deploy your AI Studio app
+Conversion-first web studio. Evidence-based design that turns visitors into customers.
 
-This contains everything you need to run your app locally.
+## Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/drive/1v6T6dzWdXFywiQzR9wYvVcVihm96I7Lf
+- **Frontend:** React 19 + TypeScript + Vite
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Charts:** Recharts
+- **Icons:** Lucide React
+- **Routing:** React Router DOM
+- **Backend:** Supabase (booking system)
 
-## Run Locally
+## Local Development
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js 18+
 
+```bash
+# Install dependencies
+npm install
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Start dev server
+npm run dev
+```
+
+The site will be available at `http://localhost:3000`
+
+## Build for Production
+
+```bash
+npm run build
+npm run preview  # Preview the build locally
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```env
+# Supabase (for booking system)
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-anon-key
+
+# Formspree (for contact form)
+VITE_FORMSPREE_ID=your-formspree-id
+```
+
+**Note:** The site works without these - booking and forms will show demo mode.
+
+## Project Structure
+
+```
+proofline/
+├── components/       # React components
+│   ├── booking/      # Booking widget
+│   ├── evidence/     # Blog/evidence components
+│   ├── pricing/      # Pricing components
+│   └── ui/           # Shared UI components
+├── content/          # Page content data
+├── data/             # Static data (pricing, case studies)
+├── lib/              # Utilities (Supabase client, booking API)
+├── public/           # Static assets
+└── supabase/         # Edge functions & migrations
+```
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home |
+| `/process` | Our process |
+| `/pricing` | Pricing tiers |
+| `/evidence` | Blog/evidence hub |
+| `/evidence/:slug` | Individual articles |
+| `/contact` | Contact + booking |
+| `/privacy` | Privacy policy |
+| `/terms` | Terms of service |
+
+## License
+
+Proprietary - ProofLine Studio
