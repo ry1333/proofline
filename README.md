@@ -33,6 +33,27 @@ npm run build
 npm run preview  # Preview the build locally
 ```
 
+## Deployment
+
+The site is hosted on **GitHub Pages** and deploys automatically via GitHub Actions on push to `main`.
+
+**Live URL:** https://ry1333.github.io/proofline/
+
+### How It Works
+
+- Vite builds to `/dist` with `base: '/proofline/'`
+- GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys on push
+- SPA routing is handled via `404.html` redirect pattern
+- React Router uses `basename={import.meta.env.BASE_URL}` for proper path handling
+
+### Troubleshooting
+
+If you see a black screen on GitHub Pages:
+1. Open browser DevTools → Console tab for errors
+2. Check Network tab for 404s on assets
+3. Ensure the Actions workflow completed successfully
+4. Hard refresh (Cmd+Shift+R / Ctrl+Shift+R) to clear cache
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` and configure:
