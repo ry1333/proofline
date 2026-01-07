@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { Section, Button, Card } from './ui/Shared';
+import { Section, Button } from './ui/Shared';
 import {
   Check,
   ChevronDown,
@@ -9,17 +9,20 @@ import {
   Loader2,
   CheckCircle,
   AlertCircle,
-  BarChart3,
-  Shield,
-  Smartphone,
-  Zap,
   Send,
   FileText,
   Video,
-  Clock,
   ExternalLink,
   Plus,
   Minus,
+  AlertTriangle,
+  Zap,
+  Target,
+  Clock,
+  Smartphone,
+  MousePointer,
+  Star,
+  MessageCircle,
 } from 'lucide-react';
 import {
   trackAuditCtaRequestClick,
@@ -37,7 +40,7 @@ const CALENDLY_URL = 'https://calendly.com/proofline/15min';
 const FALLBACK_EMAIL = 'hello@proofline.co';
 
 // ============================================
-// SECTION 1: HERO
+// SECTION 1: HERO (Restructured for clarity)
 // ============================================
 const HeroSection: React.FC = () => {
   const scrollToForm = () => {
@@ -50,10 +53,10 @@ const HeroSection: React.FC = () => {
     window.open(CALENDLY_URL, '_blank');
   };
 
-  const trustChips = ['Mobile-first', 'Tracking-ready', 'Clear next steps', 'Local-friendly'];
+  const trustChips = ['Mobile-first', 'Tracking-ready', 'Clear next steps', 'Sarasota local'];
 
   return (
-    <Section className="pt-32 pb-16">
+    <Section className="pt-32 pb-12">
       <motion.div
         className="max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
@@ -69,23 +72,28 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* H1 */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
           Free Website +<br className="hidden sm:block" /> Speed-to-Lead Audit
         </h1>
 
-        {/* Subhead */}
-        <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-4 max-w-2xl">
-          We review your website like a conversion lab: clarity, trust, speed, and lead response.
+        {/* Subhead - Plain language */}
+        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-3 max-w-2xl">
+          We find what's costing you calls and bookings: clarity, trust, speed, and follow-up.
         </p>
 
-        {/* One-line deliverable */}
+        {/* Definition line */}
+        <p className="text-sm text-gray-500 mb-6 max-w-2xl leading-relaxed">
+          <span className="text-brand-accent font-medium">Speed-to-lead</span> = how fast you respond after someone reaches out.
+        </p>
+
+        {/* Deliverable line */}
         <div className="flex items-center gap-2 mb-8 text-gray-300">
-          <FileText size={16} className="text-brand-accent" />
-          <span className="text-sm">You get a 1-page report + a short Loom walkthrough.</span>
+          <FileText size={16} className="text-brand-accent flex-shrink-0" />
+          <span className="text-sm leading-relaxed">You get a 1-page report + a short Loom walkthrough.</span>
         </div>
 
         {/* CTA Row */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+        <div className="flex flex-col sm:flex-row gap-3 mb-3">
           <Button size="lg" onClick={scrollToForm} className="w-full sm:w-auto">
             Request Free Audit
             <ArrowRight size={16} className="ml-2" />
@@ -96,9 +104,9 @@ const HeroSection: React.FC = () => {
           </Button>
         </div>
 
-        {/* Helper line */}
-        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-wider mb-8">
-          Delivered in 24–48h. No spam.
+        {/* Helper line - Updated */}
+        <p className="font-mono text-[11px] text-gray-500 uppercase tracking-wider mb-8">
+          Delivered in 24–48h. No spam. No login needed.
         </p>
 
         {/* Trust chips */}
@@ -119,46 +127,137 @@ const HeroSection: React.FC = () => {
 };
 
 // ============================================
-// SECTION 2: WHAT YOU GET (4 Cards)
+// SECTION 2: SAMPLE AUDIT PREVIEW (Visual)
 // ============================================
-const WhatYouGetSection: React.FC = () => {
-  const cards = [
+const SampleAuditPreview: React.FC = () => {
+  const exampleFindings = [
     {
-      icon: BarChart3,
-      title: 'Conversion Breakdown',
-      bullets: ['Above-the-fold clarity', 'CTA placement + copy', 'Funnel friction points'],
+      title: 'CTA not visible on mobile',
+      impact: 'Visitors don\'t know what to do next',
+      fix: 'Add primary CTA above the fold + sticky mobile button',
     },
     {
-      icon: Shield,
-      title: 'Trust Audit',
-      bullets: ['Reviews/proof placement', 'Credibility blocks', 'Social proof gaps'],
+      title: 'No reviews near booking form',
+      impact: 'People hesitate without social proof',
+      fix: 'Add 2-3 testimonials or star rating near the form',
     },
     {
-      icon: Smartphone,
-      title: 'Speed + Mobile UX',
-      bullets: ['Load bottlenecks (high level)', 'Mobile friction points', 'Core Web Vitals review'],
-    },
-    {
-      icon: Zap,
-      title: 'Speed-to-Lead System',
-      bullets: ['Follow-up gaps', 'Booking + routing flow', 'Response time pathway'],
+      title: 'Slow response after form submit',
+      impact: 'Leads go cold within 5 minutes',
+      fix: 'Set up instant email/SMS confirmation + calendar link',
     },
   ];
 
   return (
-    <Section className="py-16 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8">
+    <Section className="py-12 border-t border-white/5">
+      <div className="flex items-center gap-3 mb-2">
         <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
         <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-          What you'll receive
+          See exactly what you'll receive
         </h2>
       </div>
+      <p className="text-xs text-gray-500 mb-8 font-mono uppercase tracking-wider">
+        Example preview (not a client report)
+      </p>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {cards.map((card, idx) => (
+      {/* Example Audit Report Panel */}
+      <motion.div
+        className="relative border border-brand-accent/30 bg-brand-panel overflow-hidden mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        {/* Corner markers */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-brand-accent"></div>
+        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-brand-accent"></div>
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-brand-accent"></div>
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-brand-accent"></div>
+
+        {/* Header */}
+        <div className="p-4 border-b border-brand-accent/20 flex items-center gap-3">
+          <FileText size={16} className="text-brand-accent" />
+          <span className="font-mono text-xs text-brand-accent uppercase tracking-wider">
+            Example 1-Page Audit
+          </span>
+        </div>
+
+        {/* Report Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          {/* Top 3 Leaks */}
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle size={14} className="text-red-400" />
+              <h3 className="font-mono text-[10px] text-red-400 uppercase tracking-wider font-bold">
+                Top 3 Leaks
+              </h3>
+            </div>
+            <ul className="space-y-2">
+              <li className="text-sm text-gray-300 leading-relaxed">• CTA buried below fold</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• No trust signals visible</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Form asks too much</li>
+            </ul>
+          </div>
+
+          {/* Quick Wins */}
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap size={14} className="text-yellow-400" />
+              <h3 className="font-mono text-[10px] text-yellow-400 uppercase tracking-wider font-bold">
+                Quick Wins (48h)
+              </h3>
+            </div>
+            <ul className="space-y-2">
+              <li className="text-sm text-gray-300 leading-relaxed">• Move phone # to header</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Add Google rating badge</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Shorten contact form</li>
+            </ul>
+          </div>
+
+          {/* Recommended Fixes */}
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <Target size={14} className="text-brand-accent" />
+              <h3 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider font-bold">
+                Recommended Fixes
+              </h3>
+            </div>
+            <ul className="space-y-2">
+              <li className="text-sm text-gray-300 leading-relaxed">• Redesign hero section</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Add testimonial section</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Optimize mobile layout</li>
+            </ul>
+          </div>
+
+          {/* Speed-to-Lead Checklist */}
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <Clock size={14} className="text-blue-400" />
+              <h3 className="font-mono text-[10px] text-blue-400 uppercase tracking-wider font-bold">
+                Speed-to-Lead
+              </h3>
+            </div>
+            <ul className="space-y-2">
+              <li className="text-sm text-gray-300 leading-relaxed">• Auto-reply: Missing</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• Calendar link: None</li>
+              <li className="text-sm text-gray-300 leading-relaxed">• SMS notify: Not set</li>
+            </ul>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Example Findings Cards */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-1.5 h-1.5 bg-white/30 rounded-full"></div>
+        <h3 className="font-mono text-[10px] text-gray-500 uppercase tracking-wider">
+          Example findings with fixes
+        </h3>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-4">
+        {exampleFindings.map((finding, idx) => (
           <motion.div
-            key={card.title}
-            className="relative border border-brand-border bg-brand-panel p-5"
+            key={finding.title}
+            className="relative border border-brand-border bg-brand-panel p-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
@@ -170,16 +269,23 @@ const WhatYouGetSection: React.FC = () => {
             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
 
-            <card.icon size={20} className="text-brand-accent mb-3" />
-            <h3 className="font-bold text-white text-sm uppercase tracking-wide mb-3">{card.title}</h3>
-            <ul className="space-y-2">
-              {card.bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-2 text-xs text-gray-400">
-                  <Check size={12} className="text-brand-accent mt-0.5 flex-shrink-0" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Screenshot placeholder */}
+            <div className="h-16 mb-3 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 flex items-center justify-center">
+              <span className="font-mono text-[9px] text-gray-600 uppercase">Screenshot area</span>
+            </div>
+
+            <h4 className="font-bold text-white text-sm mb-2 leading-snug">{finding.title}</h4>
+
+            <div className="space-y-2">
+              <div>
+                <span className="font-mono text-[9px] text-red-400 uppercase tracking-wider">Impact:</span>
+                <p className="text-xs text-gray-400 leading-relaxed">{finding.impact}</p>
+              </div>
+              <div>
+                <span className="font-mono text-[9px] text-brand-accent uppercase tracking-wider">Fix:</span>
+                <p className="text-xs text-gray-300 leading-relaxed">{finding.fix}</p>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -188,43 +294,39 @@ const WhatYouGetSection: React.FC = () => {
 };
 
 // ============================================
-// SECTION 3: WHAT WE CHECK (Checklist)
+// SECTION 3: COMMON LEAKS (Skim section)
 // ============================================
-const WhatWeCheckSection: React.FC = () => {
-  const checks = [
-    'Headline/message match',
-    'Navigation simplicity',
-    'Primary CTA visibility',
-    'Form friction',
-    'Trust stack placement',
-    'Mobile layout issues',
-    'Page speed / heavy assets',
-    'Contact/booking clarity',
-    'Response-time pathway',
-    'Tracking readiness (GA4)',
+const CommonLeaksSection: React.FC = () => {
+  const leaks = [
+    { icon: MousePointer, text: 'No clear CTA above the fold' },
+    { icon: Smartphone, text: 'Slow on mobile' },
+    { icon: Star, text: 'No reviews near CTA' },
+    { icon: Target, text: 'Too many choices' },
+    { icon: AlertCircle, text: 'Form friction' },
+    { icon: MessageCircle, text: 'No instant follow-up' },
   ];
 
   return (
-    <Section className="py-16 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8">
+    <Section className="py-12 border-t border-white/5">
+      <div className="flex items-center gap-3 mb-6">
         <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
         <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-          What we check
+          Common leaks we catch in Sarasota business websites
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {checks.map((check, idx) => (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {leaks.map((leak, idx) => (
           <motion.div
-            key={check}
-            className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10"
+            key={leak.text}
+            className="flex flex-col items-center gap-2 px-3 py-4 bg-white/5 border border-white/10 text-center"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: idx * 0.03 }}
+            transition={{ delay: idx * 0.05 }}
             viewport={{ once: true }}
           >
-            <Check size={12} className="text-brand-accent flex-shrink-0" />
-            <span className="text-xs text-gray-300">{check}</span>
+            <leak.icon size={18} className="text-brand-accent" />
+            <span className="text-xs text-gray-300 leading-snug">{leak.text}</span>
           </motion.div>
         ))}
       </div>
@@ -233,9 +335,9 @@ const WhatWeCheckSection: React.FC = () => {
 };
 
 // ============================================
-// SECTION 4: THE FORM
+// SECTION 4: FORM + PREVIEW (2-Column Layout)
 // ============================================
-const AuditFormSection: React.FC = () => {
+const FormAndPreviewSection: React.FC = () => {
   const navigate = useNavigate();
   const [showOptional, setShowOptional] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -256,13 +358,13 @@ const AuditFormSection: React.FC = () => {
   });
 
   const goalOptions = [
-    { value: '', label: 'Select your primary goal...' },
-    { value: 'more_calls', label: 'More calls' },
+    { value: '', label: 'What\'s your main goal?' },
+    { value: 'more_calls', label: 'More phone calls' },
     { value: 'more_bookings', label: 'More bookings' },
     { value: 'more_form_leads', label: 'More form leads' },
-    { value: 'better_trust', label: 'Better trust' },
-    { value: 'faster_site', label: 'Faster site' },
-    { value: 'not_sure', label: 'Not sure' },
+    { value: 'better_trust', label: 'Build more trust' },
+    { value: 'faster_site', label: 'Faster website' },
+    { value: 'not_sure', label: 'Not sure yet' },
   ];
 
   const industryOptions = [
@@ -320,7 +422,6 @@ const AuditFormSection: React.FC = () => {
     e.preventDefault();
     trackAuditFormSubmitAttempt();
 
-    // Validate required fields
     const newErrors: Record<string, string> = {};
     ['name', 'email', 'business', 'website', 'goal'].forEach((field) => {
       const error = validateField(field, formData[field as keyof AuditFormData] as string);
@@ -335,7 +436,6 @@ const AuditFormSection: React.FC = () => {
     setStatus('submitting');
     setErrorMessage('');
 
-    // Normalize website URL
     const submitData = {
       ...formData,
       website: normalizeUrl(formData.website),
@@ -346,7 +446,6 @@ const AuditFormSection: React.FC = () => {
     if (result.success) {
       trackAuditFormSubmitSuccess(formData.goal);
       setStatus('success');
-      // Navigate to thanks page or show success
       navigate('/thanks');
     } else {
       trackAuditFormSubmitError(result.error);
@@ -356,13 +455,13 @@ const AuditFormSection: React.FC = () => {
   };
 
   const inputClasses = (fieldName: string) =>
-    `w-full px-4 py-3 bg-black/50 border ${
+    `w-full px-4 py-3.5 bg-black/50 border ${
       errors[fieldName] ? 'border-red-500' : 'border-brand-border'
-    } text-white placeholder-gray-600 focus:border-brand-accent focus:outline-none transition-colors text-base`;
+    } text-white placeholder-gray-500 focus:border-brand-accent focus:outline-none transition-colors text-base leading-normal`;
 
   if (status === 'success') {
     return (
-      <Section id="audit-form" className="py-16 border-t border-white/5">
+      <Section id="audit-form" className="py-12 border-t border-white/5">
         <div className="max-w-2xl mx-auto">
           <div className="relative border border-brand-accent/30 bg-brand-accent/[0.02] p-8 text-center">
             <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-brand-accent"></div>
@@ -372,7 +471,7 @@ const AuditFormSection: React.FC = () => {
 
             <CheckCircle size={48} className="text-brand-accent mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Audit Request Received!</h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-300 mb-6 leading-relaxed">
               We'll review your site and send your audit within 24–48 hours.
             </p>
             <Button onClick={() => window.open(CALENDLY_URL, '_blank')}>
@@ -386,19 +485,21 @@ const AuditFormSection: React.FC = () => {
   }
 
   return (
-    <Section id="audit-form" className="py-16 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8">
+    <Section id="audit-form" className="py-12 border-t border-white/5">
+      <div className="flex items-center gap-3 mb-6">
         <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
         <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-          Request your audit
+          Request your free audit
         </h2>
       </div>
 
-      <div className="max-w-2xl mx-auto">
+      {/* 2-Column Layout */}
+      <div className="grid lg:grid-cols-2 gap-8">
+        {/* Left: Form */}
         <motion.div
           className="relative border border-brand-accent/30 bg-brand-accent/[0.02] overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
           {/* Corner markers */}
@@ -408,62 +509,62 @@ const AuditFormSection: React.FC = () => {
           <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-brand-accent"></div>
 
           {/* Header */}
-          <div className="p-5 border-b border-brand-accent/20 flex items-center gap-3">
-            <Send size={18} className="text-brand-accent" />
-            <h3 className="font-bold text-white uppercase tracking-wide">Free Audit Request</h3>
+          <div className="p-4 border-b border-brand-accent/20 flex items-center gap-3">
+            <Send size={16} className="text-brand-accent" />
+            <h3 className="font-bold text-white uppercase tracking-wide text-sm">Free Audit Request</h3>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="p-5 md:p-8 space-y-5">
-            {/* Full Name */}
-            <div>
-              <label htmlFor="name" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="John Smith"
-                className={inputClasses('name')}
-                aria-invalid={!!errors.name}
-              />
-              {errors.name && (
-                <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle size={12} /> {errors.name}
-                </p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
-                Email *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="john@company.com"
-                className={inputClasses('email')}
-                aria-invalid={!!errors.email}
-              />
-              {errors.email && (
-                <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                  <AlertCircle size={12} /> {errors.email}
-                </p>
-              )}
+          <form onSubmit={handleSubmit} className="p-5 md:p-6 space-y-4">
+            {/* Name + Email Row */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="name" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="John Smith"
+                  className={inputClasses('name')}
+                  aria-invalid={!!errors.name}
+                />
+                {errors.name && (
+                  <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
+                    <AlertCircle size={12} /> {errors.name}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="john@company.com"
+                  className={inputClasses('email')}
+                  aria-invalid={!!errors.email}
+                />
+                {errors.email && (
+                  <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
+                    <AlertCircle size={12} /> {errors.email}
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Business Name */}
             <div>
-              <label htmlFor="business" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+              <label htmlFor="business" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                 Business Name *
               </label>
               <input
@@ -486,7 +587,7 @@ const AuditFormSection: React.FC = () => {
 
             {/* Website URL */}
             <div>
-              <label htmlFor="website" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+              <label htmlFor="website" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                 Website URL *
               </label>
               <input
@@ -500,6 +601,9 @@ const AuditFormSection: React.FC = () => {
                 className={inputClasses('website')}
                 aria-invalid={!!errors.website}
               />
+              <p className="text-[11px] text-gray-500 mt-1.5 leading-relaxed">
+                We don't need access — just the public link.
+              </p>
               {errors.website && (
                 <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
                   <AlertCircle size={12} /> {errors.website}
@@ -509,7 +613,7 @@ const AuditFormSection: React.FC = () => {
 
             {/* Primary Goal */}
             <div>
-              <label htmlFor="goal" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+              <label htmlFor="goal" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                 Primary Goal *
               </label>
               <select
@@ -538,7 +642,7 @@ const AuditFormSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowOptional(!showOptional)}
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors py-1"
               aria-expanded={showOptional}
             >
               {showOptional ? <Minus size={14} /> : <Plus size={14} />}
@@ -552,12 +656,11 @@ const AuditFormSection: React.FC = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="space-y-5 overflow-hidden"
+                  className="space-y-4 overflow-hidden"
                 >
-                  {/* Phone + City */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                      <label htmlFor="phone" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                         Phone
                       </label>
                       <input
@@ -571,7 +674,7 @@ const AuditFormSection: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="city" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                      <label htmlFor="city" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                         City / Service Area
                       </label>
                       <input
@@ -586,10 +689,9 @@ const AuditFormSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Industry + Lead Source */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="industry" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                      <label htmlFor="industry" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                         Industry
                       </label>
                       <select
@@ -607,7 +709,7 @@ const AuditFormSection: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="leadSource" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                      <label htmlFor="leadSource" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
                         How did you find us?
                       </label>
                       <select
@@ -626,17 +728,16 @@ const AuditFormSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Message */}
                   <div>
-                    <label htmlFor="message" className="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
-                      Anything else we should know?
+                    <label htmlFor="message" className="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-1.5">
+                      Anything else?
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your business or specific concerns..."
+                      placeholder="Tell us about your business..."
                       rows={3}
                       className={`${inputClasses('message')} resize-none`}
                     />
@@ -650,9 +751,9 @@ const AuditFormSection: React.FC = () => {
               <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-sm flex items-start gap-2">
                 <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
                 <div>
-                  <p>{errorMessage}</p>
+                  <p className="leading-relaxed">{errorMessage}</p>
                   <p className="text-xs mt-1">
-                    Or email us directly at{' '}
+                    Or email us at{' '}
                     <a href={`mailto:${FALLBACK_EMAIL}`} className="underline hover:text-red-300">
                       {FALLBACK_EMAIL}
                     </a>
@@ -677,10 +778,86 @@ const AuditFormSection: React.FC = () => {
             </Button>
 
             {/* Reassurance */}
-            <p className="font-mono text-[10px] text-gray-500 uppercase tracking-wider text-center">
-              Delivered in 24–48h. No spam.
+            <p className="font-mono text-[11px] text-gray-500 uppercase tracking-wider text-center leading-relaxed">
+              Delivered in 24–48h. No spam. No login needed.
             </p>
           </form>
+        </motion.div>
+
+        {/* Right: What You Get */}
+        <motion.div
+          className="space-y-6"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          {/* What's included */}
+          <div className="relative border border-brand-border bg-brand-panel p-5">
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+            <h3 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider mb-4">
+              What's included
+            </h3>
+            <ul className="space-y-3">
+              {[
+                '1-page PDF with top issues + fixes',
+                'Loom video walkthrough (3-5 min)',
+                'Speed-to-lead assessment',
+                'Mobile + desktop review',
+                'Prioritized action items',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Check size={14} className="text-brand-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-300 leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Timeline */}
+          <div className="relative border border-brand-border bg-brand-panel p-5">
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+            <h3 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider mb-4">
+              How it works
+            </h3>
+            <div className="space-y-4">
+              {[
+                { num: '01', text: 'Submit the form (60 seconds)' },
+                { num: '02', text: 'We review + record your Loom' },
+                { num: '03', text: 'Audit delivered in 24–48h' },
+              ].map((step) => (
+                <div key={step.num} className="flex items-start gap-3">
+                  <span className="font-mono text-lg font-bold text-brand-accent/30">{step.num}</span>
+                  <span className="text-sm text-gray-300 leading-relaxed pt-1">{step.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Trust callout */}
+          <div className="relative border border-brand-border bg-brand-panel p-5">
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+            <div className="flex items-center gap-2 mb-2">
+              <Video size={14} className="text-brand-accent" />
+              <h3 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
+                No strings attached
+              </h3>
+            </div>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              The audit is yours whether you hire us or not. We're building ProofLine publicly and want to help local businesses.
+            </p>
+          </div>
         </motion.div>
       </div>
     </Section>
@@ -688,102 +865,7 @@ const AuditFormSection: React.FC = () => {
 };
 
 // ============================================
-// SECTION 5: WHAT HAPPENS NEXT
-// ============================================
-const WhatHappensNextSection: React.FC = () => {
-  const steps = [
-    { id: '01', title: 'Submit the form', desc: 'Takes 60 seconds' },
-    { id: '02', title: 'We review + record', desc: 'Your personalized Loom' },
-    { id: '03', title: 'Receive your audit', desc: 'Within 24–48 hours' },
-  ];
-
-  return (
-    <Section className="py-16 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
-        <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-          What happens next
-        </h2>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-6 mb-6">
-        {steps.map((step, idx) => (
-          <motion.div
-            key={step.id}
-            className="relative border border-brand-border bg-brand-panel p-5"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
-
-            <span className="font-mono text-2xl font-bold text-brand-accent/30 block mb-2">
-              {step.id}
-            </span>
-            <h3 className="font-bold text-white mb-1">{step.title}</h3>
-            <p className="text-sm text-gray-500">{step.desc}</p>
-
-            {idx < 2 && (
-              <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                <ArrowRight size={16} className="text-brand-border" />
-              </div>
-            )}
-          </motion.div>
-        ))}
-      </div>
-
-      <p className="font-mono text-[10px] text-gray-500 uppercase tracking-wider text-center">
-        If there's a fast win, we'll highlight it first.
-      </p>
-    </Section>
-  );
-};
-
-// ============================================
-// SECTION 6: TRUST WITHOUT RESULTS
-// ============================================
-const TrustSection: React.FC = () => (
-  <Section className="py-16 border-t border-white/5">
-    <motion.div
-      className="relative border border-brand-border bg-brand-panel p-6 md:p-8 max-w-2xl mx-auto"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-    >
-      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
-      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
-      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
-      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
-
-      <div className="flex items-center gap-2 mb-4">
-        <Video size={18} className="text-brand-accent" />
-        <h3 className="font-bold text-white uppercase tracking-wide text-sm">
-          Early studio — documented deployments
-        </h3>
-      </div>
-
-      <p className="text-gray-400 text-sm leading-relaxed mb-4">
-        We're building ProofLine publicly. You'll get a clear audit whether you hire us or not.
-      </p>
-
-      <div className="flex flex-wrap gap-4 text-sm">
-        <Link to="/process" className="text-brand-accent hover:underline flex items-center gap-1">
-          See the process <ArrowRight size={14} />
-        </Link>
-        <Link to="/contact" className="text-brand-accent hover:underline flex items-center gap-1">
-          Contact <ArrowRight size={14} />
-        </Link>
-      </div>
-    </motion.div>
-  </Section>
-);
-
-// ============================================
-// SECTION 7: FAQ
+// SECTION 5: FAQ (Condensed)
 // ============================================
 const FAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -791,15 +873,15 @@ const FAQSection: React.FC = () => {
   const faqs = [
     {
       q: 'What exactly do I receive?',
-      a: 'A 1-page PDF report covering conversion clarity, trust signals, mobile UX, and speed-to-lead. Plus a short Loom video walking you through the findings with specific recommendations.',
+      a: 'A 1-page PDF report covering your top conversion issues, quick wins, and a speed-to-lead assessment. Plus a 3-5 minute Loom video walking you through everything.',
     },
     {
       q: 'Is it really free?',
-      a: 'Yes. No hidden fees, no automatic charges. We offer this to demonstrate our approach and build relationships with local businesses.',
+      a: 'Yes. No hidden fees. We use this to demonstrate our approach and build relationships with Sarasota businesses.',
     },
     {
       q: 'Do you need access to my website?',
-      a: 'No. We review your live site as a visitor would. We don\'t need any logins or backend access.',
+      a: 'No. We review your live site as a visitor would. No logins or backend access needed.',
     },
     {
       q: 'How long does it take?',
@@ -807,28 +889,20 @@ const FAQSection: React.FC = () => {
     },
     {
       q: 'Will you spam me?',
-      a: 'No. You\'ll receive your audit and maybe one follow-up email. That\'s it. No newsletters or sales sequences.',
-    },
-    {
-      q: 'What if I want you to implement the fixes?',
-      a: 'We can discuss that after you receive the audit. There\'s no obligation, and the audit is valuable whether you work with us or not.',
-    },
-    {
-      q: 'Do you work locally in Sarasota?',
-      a: 'Yes! We\'re based in Sarasota and specialize in helping local service businesses. We also work with clients remotely.',
+      a: 'No. You\'ll get your audit and maybe one follow-up. That\'s it.',
     },
   ];
 
   return (
-    <Section className="py-16 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8">
+    <Section className="py-12 border-t border-white/5">
+      <div className="flex items-center gap-3 mb-6">
         <div className="w-1.5 h-1.5 bg-brand-accent rounded-full"></div>
         <h2 className="font-mono text-[10px] text-brand-accent uppercase tracking-wider">
-          Frequently Asked Questions
+          Questions
         </h2>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-3">
+      <div className="max-w-3xl space-y-2">
         {faqs.map((faq, idx) => {
           const isOpen = openIndex === idx;
           return (
@@ -842,7 +916,7 @@ const FAQSection: React.FC = () => {
                 aria-expanded={isOpen}
                 aria-controls={`faq-audit-${idx}`}
               >
-                <span className={`font-medium ${isOpen ? 'text-white' : 'text-gray-300'}`}>
+                <span className={`font-medium text-sm ${isOpen ? 'text-white' : 'text-gray-300'} leading-relaxed`}>
                   {faq.q}
                 </span>
                 <ChevronDown
@@ -873,7 +947,7 @@ const FAQSection: React.FC = () => {
 };
 
 // ============================================
-// SECTION 8: FINAL CTA
+// SECTION 6: FINAL CTA (Updated)
 // ============================================
 const FinalCTASection: React.FC = () => {
   const scrollToForm = () => {
@@ -887,7 +961,7 @@ const FinalCTASection: React.FC = () => {
   };
 
   return (
-    <Section className="py-20 border-t border-white/5">
+    <Section className="py-16 border-t border-white/5">
       <motion.div
         className="relative border border-brand-accent/30 bg-brand-accent/[0.02] p-8 md:p-12 text-center max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
@@ -905,11 +979,15 @@ const FinalCTASection: React.FC = () => {
           </span>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-          Want the audit — or ready to deploy?
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">
+          Get your free audit today
         </h2>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+        <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto leading-relaxed">
+          If we find a fast win, we'll highlight it first. No spam, no sales pitch — just useful insights.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
           <Button size="lg" onClick={scrollToForm} className="w-full sm:w-auto">
             Request Free Audit
             <ArrowRight size={16} className="ml-2" />
@@ -920,8 +998,8 @@ const FinalCTASection: React.FC = () => {
           </Button>
         </div>
 
-        <p className="font-mono text-[10px] text-gray-500 uppercase tracking-wider">
-          Delivered in 24–48h. No spam.
+        <p className="font-mono text-[11px] text-gray-500 uppercase tracking-wider">
+          Delivered in 24–48h. No spam. No login needed.
         </p>
       </motion.div>
     </Section>
@@ -936,8 +1014,7 @@ const StickyCTABar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero (roughly 500px)
-      setIsVisible(window.scrollY > 500);
+      setIsVisible(window.scrollY > 600);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -965,14 +1042,14 @@ const StickyCTABar: React.FC = () => {
         >
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <span className="hidden sm:block font-mono text-[10px] text-gray-500 uppercase tracking-wider">
-              // Free audit request
+              // Free audit — 24–48h delivery
             </span>
             <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-end">
               <Button size="sm" onClick={scrollToForm}>
                 Request Free Audit
               </Button>
               <Button size="sm" variant="secondary" onClick={handleBookCall}>
-                Book a 15-min Call
+                Book a Call
               </Button>
             </div>
           </div>
@@ -989,11 +1066,9 @@ const AuditPage: React.FC = () => {
   return (
     <>
       <HeroSection />
-      <WhatYouGetSection />
-      <WhatWeCheckSection />
-      <AuditFormSection />
-      <WhatHappensNextSection />
-      <TrustSection />
+      <SampleAuditPreview />
+      <CommonLeaksSection />
+      <FormAndPreviewSection />
       <FAQSection />
       <FinalCTASection />
       <StickyCTABar />
