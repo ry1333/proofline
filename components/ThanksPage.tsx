@@ -12,13 +12,16 @@ import {
   Calendar,
 } from 'lucide-react';
 import { trackAuditCtaBookCallClick } from '../utils/analytics';
+import { useNavigate } from 'react-router-dom';
 
-const CALENDLY_URL = 'https://calendly.com/proofline/15min';
+const BOOKING_URL = '/contact#calendar';
 
 const ThanksPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleBookCall = () => {
     trackAuditCtaBookCallClick('audit_footer');
-    window.open(CALENDLY_URL, '_blank');
+    navigate(BOOKING_URL);
   };
 
   return (
@@ -116,7 +119,7 @@ const ThanksPage: React.FC = () => {
           </p>
           <Button onClick={handleBookCall}>
             Book a 15-min Call
-            <ExternalLink size={14} className="ml-2" />
+            <ArrowRight size={14} className="ml-2" />
           </Button>
         </motion.div>
 

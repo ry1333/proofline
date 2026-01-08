@@ -36,7 +36,7 @@ import { submitAuditForm, isValidEmail, isValidUrl, normalizeUrl, type AuditForm
 // ============================================
 // CONSTANTS
 // ============================================
-const CALENDLY_URL = 'https://calendly.com/proofline/15min';
+const BOOKING_URL = '/contact#calendar';
 const FALLBACK_EMAIL = 'hello@proofline.co';
 
 // ============================================
@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
 
   const handleBookCall = () => {
     trackAuditCtaBookCallClick('audit_hero');
-    window.open(CALENDLY_URL, '_blank');
+    window.location.href = BOOKING_URL;
   };
 
   const trustChips = ['Mobile-first', 'Tracking-ready', 'Clear next steps', 'Sarasota local'];
@@ -474,9 +474,9 @@ const FormAndPreviewSection: React.FC = () => {
             <p className="text-gray-300 mb-6 leading-relaxed">
               We'll review your site and send your audit within 24–48 hours.
             </p>
-            <Button onClick={() => window.open(CALENDLY_URL, '_blank')}>
+            <Button onClick={() => window.location.href = BOOKING_URL}>
               Book a 15-min Call
-              <ExternalLink size={14} className="ml-2" />
+              <ArrowRight size={14} className="ml-2" />
             </Button>
           </div>
         </div>
@@ -957,7 +957,7 @@ const FinalCTASection: React.FC = () => {
 
   const handleBookCall = () => {
     trackAuditCtaBookCallClick('audit_footer');
-    window.open(CALENDLY_URL, '_blank');
+    window.location.href = BOOKING_URL;
   };
 
   return (
@@ -1028,7 +1028,7 @@ const StickyCTABar: React.FC = () => {
 
   const handleBookCall = () => {
     trackAuditCtaBookCallClick('audit_sticky');
-    window.open(CALENDLY_URL, '_blank');
+    window.location.href = BOOKING_URL;
   };
 
   return (

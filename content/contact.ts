@@ -53,10 +53,9 @@ export const contactContent = {
   // CALENDAR CONFIG
   // ============================================
   calendar: {
-    // Set embedUrl for inline embed (recommended)
-    embedUrl: 'https://calendly.com/proofline/15min',
-    // Fallback link if embed fails
-    linkUrl: 'https://calendly.com/proofline/15min',
+    // Custom booking widget is embedded on /contact page
+    // linkUrl is used for external "Book a Call" buttons
+    linkUrl: '/contact#calendar',
   },
 
   // ============================================
