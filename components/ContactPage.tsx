@@ -374,7 +374,7 @@ const ContactForm: React.FC = () => {
             {form.fields.website.label}
           </label>
           <input
-            type="url"
+            type="text"
             id="website"
             name="website"
             value={formData.website}
