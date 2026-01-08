@@ -138,7 +138,7 @@ async function sendConfirmationEmail(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: `${orgName || 'ProofLine'} <hello@proofline.co>`,
+        from: 'ProofLine <ryan@proofline.design>',
         to: [to],
         subject: `Your ${duration}-minute call is confirmed!`,
         html: `
@@ -223,7 +223,7 @@ async function sendAdminNotification(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'ProofLine Bookings <hello@proofline.co>',
+        from: 'ProofLine Bookings <ryan@proofline.design>',
         to: [orgEmail],
         subject: `New Booking: ${customerName} - ${formattedDate} ${formattedTime}`,
         html: `
