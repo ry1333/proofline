@@ -1,5 +1,5 @@
 // Supabase Edge Function: Create Booking
-// Handles: Database insert + Zoom meeting + Email confirmation
+// Handles: Database insert + Zoom meeting + Email confirmation + SMS notification
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
@@ -247,6 +247,71 @@ async function sendAdminNotification(
 }
 
 // =============================================
+// SMS NOTIFICATION (Twilio)
+// =============================================
+async function sendSmsNotification(
+  customerName: string,
+  customerEmail: string,
+  customerCompany: string | undefined,
+  startTime: string,
+  duration: number,
+  zoomUrl?: string
+) {
+  const accountSid = Deno.env.get('TWILIO_ACCOUNT_SID')
+  const authToken = Deno.env.get('TWILIO_AUTH_TOKEN')
+  const twilioPhone = Deno.env.get('TWILIO_PHONE_NUMBER')
+  const notifyPhone = Deno.env.get('NOTIFY_PHONE_NUMBER')
+
+  if (!accountSid || !authToken || !twilioPhone || !notifyPhone) {
+    console.log('Twilio not configured, skipping SMS')
+    return false
+  }
+
+  const meetingDate = new Date(startTime)
+  const formattedDate = meetingDate.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  })
+  const formattedTime = meetingDate.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
+
+  const message = `📅 NEW BOOKING!\n\n${customerName}${customerCompany ? ` (${customerCompany})` : ''}\n📧 ${customerEmail}\n🕐 ${formattedDate} @ ${formattedTime}\n⏱ ${duration} min${zoomUrl ? `\n🔗 ${zoomUrl}` : ''}`
+
+  try {
+    const res = await fetch(
+      `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${btoa(`${accountSid}:${authToken}`)}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          To: notifyPhone,
+          From: twilioPhone,
+          Body: message,
+        }),
+      }
+    )
+
+    if (!res.ok) {
+      console.error('Failed to send SMS:', await res.text())
+      return false
+    }
+
+    console.log('SMS sent successfully')
+    return true
+  } catch (error) {
+    console.error('SMS error:', error)
+    return false
+  }
+}
+
+// =============================================
 // MAIN HANDLER
 // =============================================
 serve(async (req) => {
@@ -356,7 +421,17 @@ serve(async (req) => {
       zoomMeeting?.url
     )
 
-    // 7. Log email
+    // 7. Send SMS notification
+    sendSmsNotification(
+      body.customer_name,
+      body.customer_email,
+      body.customer_company,
+      body.start_time,
+      org.booking_duration,
+      zoomMeeting?.url
+    )
+
+    // 8. Log email
     if (Deno.env.get('RESEND_API_KEY')) {
       await supabase.from('email_logs').insert({
         booking_id: booking.id,

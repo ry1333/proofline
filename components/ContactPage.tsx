@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { contactContent } from '../content/contact';
 import { trackEvent, trackBookCallClick, trackRunAuditClick } from '../utils/analytics';
+import { sendFormNotification } from '../lib/forms';
 
 // ============================================
 // HERO SECTION
@@ -208,6 +209,15 @@ const ContactForm: React.FC = () => {
       if (response.ok) {
         setStatus('success');
         trackEvent('contact_form_submit_success', { goal: formData.goal, wantAudit: formData.wantAudit });
+        // Send SMS notification (async, don't wait)
+        sendFormNotification('contact', {
+          name: formData.name,
+          email: formData.email,
+          business: formData.business,
+          phone: formData.phone,
+          goal: formData.goal,
+          message: formData.message,
+        });
         setFormData({
           name: '',
           email: '',

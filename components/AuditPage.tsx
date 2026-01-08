@@ -31,7 +31,7 @@ import {
   trackAuditFormSubmitSuccess,
   trackAuditFormSubmitError,
 } from '../utils/analytics';
-import { submitAuditForm, isValidEmail, isValidUrl, normalizeUrl, type AuditFormData } from '../lib/forms';
+import { submitAuditForm, isValidEmail, isValidUrl, normalizeUrl, sendFormNotification, type AuditFormData } from '../lib/forms';
 
 // ============================================
 // CONSTANTS
@@ -445,6 +445,14 @@ const FormAndPreviewSection: React.FC = () => {
 
     if (result.success) {
       trackAuditFormSubmitSuccess(formData.goal);
+      // Send SMS notification (async, don't wait)
+      sendFormNotification('audit', {
+        name: formData.name,
+        email: formData.email,
+        business: formData.business,
+        website: submitData.website,
+        goal: formData.goal,
+      });
       setStatus('success');
       navigate('/thanks');
     } else {

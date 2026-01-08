@@ -1,5 +1,8 @@
 // Form submission utilities for ProofLine
-// Handles Formspree integration with graceful fallbacks
+// Handles Formspree integration with graceful fallbacks + SMS notifications
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export interface AuditFormData {
   name: string;
@@ -106,4 +109,43 @@ export const normalizeUrl = (url: string): string => {
     return url;
   }
   return `https://${url}`;
+};
+
+/**
+ * Send SMS notification via Edge Function
+ * Called after successful form submission
+ */
+export const sendFormNotification = async (
+  formType: 'audit' | 'contact',
+  data: {
+    name: string;
+    email: string;
+    business?: string;
+    website?: string;
+    phone?: string;
+    goal?: string;
+    message?: string;
+  }
+): Promise<void> => {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.log('Supabase not configured, skipping SMS notification');
+    return;
+  }
+
+  try {
+    await fetch(`${SUPABASE_URL}/functions/v1/notify-form`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({
+        form_type: formType,
+        ...data,
+      }),
+    });
+  } catch (error) {
+    // Don't fail the form submission if SMS fails
+    console.error('SMS notification error:', error);
+  }
 };
